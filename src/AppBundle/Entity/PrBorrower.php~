@@ -1,0 +1,33 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PrBorrower
+ *
+ * @ORM\Table(name="pr_borrower")
+ * @ORM\Entity
+ */
+class PrBorrower
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="yearofbirth", type="date", nullable=true)
+     */
+    private $yearofbirth;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_borrower", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idBorrower;
+
+
+}
+

@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="container">
+
+        <div class="row">
+            <h2 class="header center amber-text text-darken-1" id="acceuil_titre_card">L'échantillon</h2>
+
+
+            <article class="col s4 m4 card center">
+                <h4>Œuvres extraites</h4>
+                <p class="detail">nb d'œuvres disctinctes extraites</p>
+                <p class="number amber-text text-darken-1">{{ nbOeuvres.nb }}</p>
+            </article>
+
+            <article class="card s4 m4 col center">
+                <h4>Notices concernées</h4>
+                <p class="detail">nb de notices associées une œuvre</p>
+                <p class="number"><span class="amber-text text-darken-1">{{ nbNoticesOeuvres.nb }}</span>/{{ nbNoticesEmpruntees.nb }}</p>
+            </article>
+
+            <article class="col s4 m4 card center">
+                <h4>Emprunts concernés</h4>
+                <p class="detail">nb d'emprunts dont les œuvres sont connues</p>
+                <p class="number"><span class="amber-text text-darken-1">{{ totalPretOeuvres.nb }}</span>/{{ (totalPret.nb)+(nbRenewals.nb) }}</p>
+            </article>
+        </div>
+
+        <div class="row">
+
+            <article class="card s6 m6 col center">
+                <h4>Ratio de notices reconnues</h4>
+                <p class="detail">pourcentage de notices associées une œuvre</p>
+                <p class="number"><span class="amber-text text-darken-1">{{ ((nbNoticesOeuvres.nb)/(nbNoticesEmpruntees.nb)*100) | number_format(3, '.', ',')}}</span> %</p>
+            </article>
+
+            <article class="card s6 m6 col center">
+                <h4>Ratio de prêts concernés</h4>
+                <p class="detail">pourcentage de notices associées une œuvre</p>
+                <p class="number"><span class="amber-text text-darken-1">{{ ((totalPretOeuvres.nb)/(totalPret.nb)*100) | number_format(2 , ',', ' ') }}</span> %</p>
+            </article>
+
+        </div>
+
+
+    </section>
+
+
+    <div class="row container-fluid">
+        <div id="index-banner" class="parallax-container">
+            <div class="section no-pad-bot">
+                <div class="container">
+                    <br><br>
+                    <h2 class="header center white-text" id="acceuil_titre_card">Les œuvres les plus empruntées</h2>
+                </div>
+            </div>
+            <div class="parallax"><img src="img/vignette.jpg" alt="Unsplashed background img 1"></div>
+        </div>
+    </div>
+
+
+    <section class="container row">
+        <h2 class="center"></h2>
+
+        <article class="row">
+            {% for item in top100oeuvresPrets| slice (0,8)  %}
+
+                    <div class="card workCard col s3">
+                        <a href="{{ path('oeuvre' , {'id' : item.work }) }}">
+                        <h3>
+                            {{ item.title }}
+                        </h3>
+                        <p>{% if item.workAuteur == '' %}Auteur inconnu{% else %}
+                                {{ item.workAuteur }}{% endif %}</p>
+                        <p>ID Data Bnf : {{ item.work }}</p>
+                        <p>Nb de prêts : <span class=" amber-text text-darken-1">{{ item.total }}</span> <!--(sans les renouvellements)--></p>
+                        </a>
+                    </div>
+
+            {% endfor %}
+        </article>
+
+        <article class="row">
+            {% for item in top100oeuvresPrets| slice (9,50)  %}
+            <a href="{{ path('oeuvre' , {'id' : item.work }) }}"><div class="chip truncate">{{ item.title }}({{ item.total }})</div></a>
+            {% endfor %}
+        </article>
+
+    </section>
+
+    <section class="container">
+
+        <!-- Les auteurs -->
+        <article>
+            <h2>Les auteurs les plus empruntés</h2>
+            {% for item in top100auteursOeuvres  %}
+                <span class="chip">{{ item.auteur }} ({{ item.total }})</span>
+            {% endfor %}
+        </article>
+
+    </section>
+{% endblock %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            $('.parallax').parallax();
+        });
+    </script>
+
+{% endblock %}

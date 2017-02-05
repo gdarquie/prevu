@@ -1,0 +1,33 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PrCcode
+ *
+ * @ORM\Table(name="pr_ccode")
+ * @ORM\Entity
+ */
+class PrCcode
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ccode", type="string", length=45, nullable=true)
+     */
+    private $ccode;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_ccode", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idCcode;
+
+
+}
+

@@ -1,0 +1,39 @@
+body{
+    background: whitesmoke;
+}
+
+#logo{
+    height:60px;
+    position:fixed;
+    left:10px;
+}
+
+.brand-logo{
+    padding : 0px 15px !important;
+}
+
+
+.number{
+    font-size: 3em;
+}
+
+.card_content{
+    margin : 10px;
+}
+
+.workCard{
+    height:280px;
+}
+
+.workCard h3 {
+    font-size:1.5em;
+    font-weight: bold;
+}
+
+.workCard a{
+    color : black;
+}
+
+.oeuvre{
+    font-size: 2em;
+}

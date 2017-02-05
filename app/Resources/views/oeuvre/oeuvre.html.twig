@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+<section class="container">
+
+    {% for item in noticesOeuvre | slice(0,1)%}
+        <h1>{{ item.workTitle }} par {% if item.workAuthor == '' %} Auteur Inconnu{% else %}{{ item.workAuthor }}{% endif %}</h1>
+    {% endfor %}
+
+    <p class="oeuvre">Nombre total d'emprunts : <span class="amber-text text-darken-1">{{ oeuvre.issues }}</span></p>
+
+    <h2>Les notices de l'œuvre</h2>
+    <table class="striped">
+        <tr><th>Titre de la notice</th><th>Auteur</th>{#<th>Date de publication</th>#}<th>Nombre de prêts</th></tr>
+    {% for item in noticesOeuvre %}
+        <tr><td>{{ item.title }}</td><td>{{ item.author }}</td>{#<td>{{ item.released }}</td>#}<td>{{ item.issues }}</td></tr>
+    {% endfor %}
+    </table>
+
+    <h2>Les emprunteurs</h2>
+
+    {% for item in userOeuvre | slice(0,1)%}
+        <p class="oeuvre">Nombre d'emprunteurs : <span  class="amber-text text-darken-1">{{ item.total }}</span> personnes.</p>
+        <p class="oeuvre">Moyenne d'âge des emprunteurs : <span  class="amber-text text-darken-1">{{ (("now"|date("Y")) - (item.year)) | number_format(2 , ',', ' ')  }}</span> ans</p>
+    {% endfor %}
+
+    <p>En cours...</p>
+</section>
+
+{% endblock %}

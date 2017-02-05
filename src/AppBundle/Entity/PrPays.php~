@@ -1,0 +1,33 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PrPays
+ *
+ * @ORM\Table(name="pr_pays")
+ * @ORM\Entity
+ */
+class PrPays
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pays", type="string", length=45, nullable=true)
+     */
+    private $pays;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_pays", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idPays;
+
+
+}
+

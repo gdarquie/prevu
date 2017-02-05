@@ -1,0 +1,25 @@
+import:
+    resource: "@ImportBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+admin:
+    resource: "@AdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+ecran:
+    resource: "@EcranBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/Web"
+    type:     annotation
+
+app_api:
+    resource: "@AppBundle/Controller/Api"
+    type:     annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

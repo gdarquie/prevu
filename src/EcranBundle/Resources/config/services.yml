@@ -1,0 +1,4 @@
+services:
+#    ecran.example:
+#        class: EcranBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

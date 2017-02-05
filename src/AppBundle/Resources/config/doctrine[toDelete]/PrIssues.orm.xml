@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\PrIssues" table="pr_issues">
+    <indexes>
+      <index name="IDX_46FD06E8182A5291" columns="idbook"/>
+      <index name="IDX_46FD06E8714505B9" columns="idborrower"/>
+    </indexes>
+    <id name="idIssue" type="integer" column="id_issue">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="sex" type="string" column="sex" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="datedue" type="date" column="datedue" nullable="true"/>
+    <field name="issuedate" type="date" column="issuedate" nullable="true"/>
+    <field name="returndate" type="date" column="returndate" nullable="true"/>
+    <field name="renewals" type="integer" column="renewals" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="niveau" type="string" column="niveau" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ufr" type="string" column="ufr" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="etape" type="string" column="etape" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="idborrower" target-entity="PrBorrower" fetch="LAZY">
+      <join-columns>
+        <join-column name="idborrower" referenced-column-name="id_borrower"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idbook" target-entity="PrBooks" fetch="LAZY">
+      <join-columns>
+        <join-column name="idbook" referenced-column-name="id_book"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

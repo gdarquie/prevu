@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\PrBooks" table="pr_books">
+    <indexes>
+      <index name="IDX_C364E8568C757DEC" columns="iditemtype"/>
+      <index name="IDX_C364E856E750CD0E" columns="idpays"/>
+      <index name="IDX_C364E85698E4791D" columns="idccode"/>
+    </indexes>
+    <id name="idBook" type="integer" column="id_book">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="title" type="text" column="title" length="16777215" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="author" type="text" column="author" length="16777215" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="publicationyear" type="date" column="publicationyear" nullable="true"/>
+    <field name="isbn" type="string" column="isbn" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cdu" type="string" column="cdu" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="dewey" type="string" column="dewey" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="issues" type="integer" column="issues" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="totalIssues" type="integer" column="total_issues" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="renewals" type="integer" column="renewals" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="work" type="string" column="work" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="idpays" target-entity="PrPays" fetch="LAZY">
+      <join-columns>
+        <join-column name="idpays" referenced-column-name="id_pays"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="iditemtype" target-entity="PrItemtype" fetch="LAZY">
+      <join-columns>
+        <join-column name="iditemtype" referenced-column-name="id_itemtype"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idccode" target-entity="PrCcode" fetch="LAZY">
+      <join-columns>
+        <join-column name="idccode" referenced-column-name="id_ccode"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="idMatiere" target-entity="PrMatiere" mapped-by="idBook" fetch="LAZY"/>
+    <many-to-many field="idlangue" target-entity="PrLangue" inversed-by="idbook" fetch="LAZY">
+      <join-table name="pr_book_langue">
+        <join-columns>
+          <join-column name="idbook" referenced-column-name="id_book"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="idlangue" referenced-column-name="id_langue"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

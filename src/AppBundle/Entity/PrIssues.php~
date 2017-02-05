@@ -1,0 +1,102 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PrIssues
+ *
+ * @ORM\Table(name="pr_issues", indexes={@ORM\Index(name="IDX_46FD06E8182A5291", columns={"idbook"}), @ORM\Index(name="IDX_46FD06E8714505B9", columns={"idborrower"})})
+ * @ORM\Entity
+ */
+class PrIssues
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sex", type="string", length=1, nullable=true)
+     */
+    private $sex;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="datedue", type="date", nullable=true)
+     */
+    private $datedue;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="issuedate", type="date", nullable=true)
+     */
+    private $issuedate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="returndate", type="date", nullable=true)
+     */
+    private $returndate;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="renewals", type="integer", nullable=true)
+     */
+    private $renewals;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="niveau", type="string", length=45, nullable=true)
+     */
+    private $niveau;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ufr", type="string", length=45, nullable=true)
+     */
+    private $ufr;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="etape", type="string", length=45, nullable=true)
+     */
+    private $etape;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_issue", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idIssue;
+
+    /**
+     * @var \AppBundle\Entity\PrBorrower
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PrBorrower")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idborrower", referencedColumnName="id_borrower")
+     * })
+     */
+    private $idborrower;
+
+    /**
+     * @var \AppBundle\Entity\PrBooks
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PrBooks")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idbook", referencedColumnName="id_book")
+     * })
+     */
+    private $idbook;
+
+
+}
+

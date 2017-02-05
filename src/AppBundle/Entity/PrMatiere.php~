@@ -1,0 +1,55 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PrMatiere
+ *
+ * @ORM\Table(name="pr_matiere")
+ * @ORM\Entity
+ */
+class PrMatiere
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="matiere", type="string", length=45, nullable=true)
+     */
+    private $matiere;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_matiere", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idMatiere;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\PrBooks", inversedBy="idMatiere")
+     * @ORM\JoinTable(name="pr_matierevedette",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="id_matiere", referencedColumnName="id_matiere")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="id_book", referencedColumnName="id_book")
+     *   }
+     * )
+     */
+    private $idBook;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->idBook = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

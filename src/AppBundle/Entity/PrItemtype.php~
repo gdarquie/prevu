@@ -1,0 +1,33 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PrItemtype
+ *
+ * @ORM\Table(name="pr_itemtype")
+ * @ORM\Entity
+ */
+class PrItemtype
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="itemtype", type="string", length=45, nullable=true)
+     */
+    private $itemtype;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_itemtype", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idItemtype;
+
+
+}
+

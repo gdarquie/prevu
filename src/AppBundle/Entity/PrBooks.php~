@@ -1,0 +1,156 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PrBooks
+ *
+ * @ORM\Table(name="pr_books", indexes={@ORM\Index(name="IDX_C364E8568C757DEC", columns={"iditemtype"}), @ORM\Index(name="IDX_C364E856E750CD0E", columns={"idpays"}), @ORM\Index(name="IDX_C364E85698E4791D", columns={"idccode"})})
+ * @ORM\Entity
+ */
+class PrBooks
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="text", length=16777215, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="author", type="text", length=16777215, nullable=true)
+     */
+    private $author;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="publicationyear", type="date", nullable=true)
+     */
+    private $publicationyear;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="isbn", type="string", length=45, nullable=true)
+     */
+    private $isbn;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cdu", type="string", length=45, nullable=true)
+     */
+    private $cdu;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dewey", type="string", length=45, nullable=true)
+     */
+    private $dewey;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="issues", type="integer", nullable=true)
+     */
+    private $issues;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="total_issues", type="integer", nullable=true)
+     */
+    private $totalIssues;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="renewals", type="integer", nullable=true)
+     */
+    private $renewals;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="work", type="string", length=255, nullable=true)
+     */
+    private $work;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_book", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idBook;
+
+    /**
+     * @var \AppBundle\Entity\PrPays
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PrPays")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idpays", referencedColumnName="id_pays")
+     * })
+     */
+    private $idpays;
+
+    /**
+     * @var \AppBundle\Entity\PrItemtype
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PrItemtype")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="iditemtype", referencedColumnName="id_itemtype")
+     * })
+     */
+    private $iditemtype;
+
+    /**
+     * @var \AppBundle\Entity\PrCcode
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PrCcode")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idccode", referencedColumnName="id_ccode")
+     * })
+     */
+    private $idccode;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\PrMatiere", mappedBy="idBook")
+     */
+    private $idMatiere;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\PrLangue", inversedBy="idbook")
+     * @ORM\JoinTable(name="pr_book_langue",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="idbook", referencedColumnName="id_book")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="idlangue", referencedColumnName="id_langue")
+     *   }
+     * )
+     */
+    private $idlangue;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->idMatiere = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idlangue = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

@@ -1,0 +1,54 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PrAmazon
+ *
+ * @ORM\Table(name="pr_amazon")
+ * @ORM\Entity
+ */
+class PrAmazon
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tiny_image", type="string", length=45, nullable=true)
+     */
+    private $tinyImage;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="medium_image", type="string", length=45, nullable=true)
+     */
+    private $mediumImage;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="large_image", type="string", length=45, nullable=true)
+     */
+    private $largeImage;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="edito", type="text", length=65535, nullable=true)
+     */
+    private $edito;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_notice", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idNotice;
+
+
+}
+

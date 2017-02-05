@@ -1,0 +1,67 @@
+{% extends "base.html.twig" %}
+
+
+{% block stylesheets %}
+
+    {{ parent() }}
+
+    <style>
+
+        .card{
+            padding : 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+        <h1>Page d'accueil de l'import des donnés de Prévu</h1>
+        <div class="card row">
+
+            <table class="striped">
+                <tr>
+                    <th>Bibliothèque</th>
+                    <th>Nombre de livres dans Prévu</th>
+                    <th>Nombbre de livres dans Koha</th>
+                </tr>
+                <tr>
+                    <td>Paris 8</td>
+                    <td>{{ totalBooksFromUp8.nb }}</td>
+                    <td>{{ totalBooksInUp8.nb }}</td>
+                </tr>
+                <tr>
+                    <td>Roubaix</td>
+                    <td>{{ totalBooksFromRbx.nb }}</td>
+                    <td>{{ totalBooksInRbx.nb }}</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>{{ totalBooks.nb }}</td>
+                    <td>{{ (totalBooksInUp8.nb)+(totalBooksInRbx.nb ) }}</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="card row">
+
+            <p>Retour sur la page d'<a href="{{ path('import') }}">accueil de l'import</a></p>
+            <ul>
+                <li>Import d'une bibliothèque : <a href="{{ path('import_library_up8') }}">up8</a>, <a href="{{ path('import_library_rbx') }}">rbx</a>
+
+                <li>Import des notices par bibliothèque : <a href="{{ path('import_allbooks', {'biblio' : 'up8'}) }}" onclick="return confirm('Are you sure?');">up8</a>,
+                    <a href="{{ path('import_allbooks', {'biblio' : 'rbx'}) }}" onclick="return confirm('Are you sure?');">rbx</a>, <a href="{{ path('delete_books') }}" onclick="return confirm('Are you sure?');">delete all</a></li></li>
+
+                <li>Import des emprunteurs : <a href="">up8</a>, <a href="">rbx</a></li>
+
+                <li>Import des prêts par bibliothèque</li>
+
+                <li>Import des auteurs par bibliothèque</li>
+            </ul>
+        </div>
+
+    </section>
+
+{% endblock %}

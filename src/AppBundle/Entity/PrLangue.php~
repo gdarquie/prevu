@@ -1,0 +1,47 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PrLangue
+ *
+ * @ORM\Table(name="pr_langue")
+ * @ORM\Entity
+ */
+class PrLangue
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="langue", type="string", length=45, nullable=true)
+     */
+    private $langue;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_langue", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idLangue;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\PrBooks", mappedBy="idlangue")
+     */
+    private $idbook;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->idbook = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

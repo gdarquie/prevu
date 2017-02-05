@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        .parallax-container {
+            height: 350px;
+        }
+
+        #acceuil_titre_card{
+            background-color: rgba(255, 255, 255, 0.8);
+            -webkit-border-radius:5px;
+            -moz-border-radius:5px;
+            border-radius:5px;
+        }
+
+        .detail{
+            font-size: 0.8em;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<section>
+
+    <div class="row container-fluid">
+        <div id="index-banner" class="parallax-container">
+            <div class="section no-pad-bot">
+                <div class="container">
+                    <br><br>
+                    <h1 class="header center amber-text text-darken-1" id="acceuil_titre_card">Visualisations des prêts</h1>
+                </div>
+            </div>
+            <div class="parallax"><img src="img/prevu_long.png" alt="Unsplashed background img 1"></div>
+        </div>
+    </div>
+
+    <div class="row container">
+
+        <article class="col s4 m4 card center">
+            <h4>Livres empruntés</h4>
+            <p class="detail">au moins une fois</p>
+            <p class="number amber-text text-darken-1">{{ nbNoticesEmpruntees.nb }}</p>
+        </article>
+
+        <article class="col s4 m4 card center">
+            <h4>Nombre de prêts</h4>
+            <p class="detail">sur l'ensemble de la période</p>
+            <p class="number amber-text text-darken-1">{{ (nbNoticesIssues.nb)+(nbRenewals.nb) }}</p>
+        </article>
+
+        <article class="col s4 m4 card center">
+            <h4>Lecteurs actifs</h4>
+            <p class="detail">ayant emprunté au moins un livre</p>
+            <p class="number amber-text text-darken-1">{{ nbNoticesBorrowers.nb }}</p>
+        </article>
+    </div>
+
+    <div class="row container  center">
+        <article class="col card s6 m6">
+            <h4>Premier emprunt</h4>
+
+            <p class="number amber-text text-darken-1">{{ firstEmprunt.nb | date("d/m/Y") }}</p>
+        </article>
+        <article class="col card s6 m6 center">
+            <h4>Dernier retour</h4>
+            <p class="number amber-text text-darken-1">{{ lastEmprunt.nb | date("d/m/Y") }}</p>
+        </article>
+
+    </div>
+    <div class="row container">
+        {#<div class="col s12 m6">#}
+            {#<div class="card">#}
+                {#<div class="card-image">#}
+                    {#<img src="img/prevu_long.png">#}
+                    {#<span class="card-title">Card Title</span>#}
+                {#</div>#}
+                {#<div class="card-content">#}
+                    {#<p>I am a very simple card. I am good at containing small bits of information.#}
+                        {#I am convenient because I require little markup to use effectively.</p>#}
+                {#</div>#}
+                {#<div class="card-action">#}
+                    {#<a href="#">This is a link</a>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-image">
+                    {#<div class="card-content">#}
+                        {#<h3 class="center">Membres</h3>#}
+                    {#</div>#}
+                    <img src="img/partenaires.png">
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-image">
+                    <img src="img/vignette_long.png">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <h3>Les Œuvres</h3>
+                        <p>Un exemple d'exploitation des données de Data Bnf et des FRBR pour la reconnaissance des œuvres.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{{ path('oeuvres') }}">Exploitation des œuvres</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            $('.parallax').parallax();
+        });
+    </script>
+
+{% endblock %}
