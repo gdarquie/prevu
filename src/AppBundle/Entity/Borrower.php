@@ -29,6 +29,23 @@ class Borrower
     private $idBorrower;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="koha", type="string")
+     */
+    private $koha;
+
+    /**
+     * @var \AppBundle\Entity\Library
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Library")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="library", referencedColumnName="id_library")
+     * })
+     */
+    private $library;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $date_creation;
@@ -95,6 +112,38 @@ class Borrower
     public function setLastUpdate($last_update)
     {
         $this->last_update = $last_update;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKoha()
+    {
+        return $this->koha;
+    }
+
+    /**
+     * @param string $koha
+     */
+    public function setKoha($koha)
+    {
+        $this->koha = $koha;
+    }
+
+    /**
+     * @return Library
+     */
+    public function getLibrary()
+    {
+        return $this->library;
+    }
+
+    /**
+     * @param Library $library
+     */
+    public function setLibrary($library)
+    {
+        $this->library = $library;
     }
 
 

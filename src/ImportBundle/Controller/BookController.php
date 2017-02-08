@@ -4,7 +4,6 @@ namespace ImportBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Response;
 
 class BookController extends Controller
 {
@@ -16,7 +15,7 @@ class BookController extends Controller
     /**
      * @Route("/import/books/lib={biblio}", name="import_books")
      */
-    public function AllBooksUp8Action($biblio){
+    public function ImportBooksAction($biblio){
 
         $user = $this->container->getParameter('database_user');
         $password = $this->container->getParameter('database_password');
@@ -79,18 +78,27 @@ class BookController extends Controller
             //Vérification des doublons pour cette bibliothèque
             //-----------------------------------------------------------
 
-            //Sélection du biblionumber
+            //Sélection du dernier biblionumber qu'on a enregistré dans Prévu
 
-            $sql_koha = "SELECT koha as id FROM prevu.key WHERE library =" . $library . " ORDER BY id_key DESC LIMIT 1"; //0.0002s
-            $lastKoha = $conn->fetchAssoc($sql_koha); //dernier id de koha sauvegardé dans key
+            $sql_koha = "SELECT koha as id FROM `key` WHERE library = :library ORDER BY id_key DESC LIMIT 1"; //0.0002s
+            $stmt = $connPrevu->prepare($sql_koha);
+            $stmt->bindValue("library", $library);
+            $stmt->execute();
+            $lastKoha = $stmt->fetch(); //dernier id de koha sauvegardé dans key
             $last_id = $lastKoha['id'];
+
+            //Vérification qu'il ne s'agit pas de la première notice qu'on insère, si c'est le cas, on crée un faux last id à 0
 
             if ($last_id < 1) {
                 $last_id = 0;
             }
 
-            $sql = "SELECT biblionumber as id FROM biblio WHERE biblionumber > " . $last_id . " LIMIT 1"; // 0.0002s
-            $id_koha = $conn->fetchAssoc($sql);
+
+            $sql = "SELECT biblionumber as id FROM biblio WHERE biblionumber > :id LIMIT 1"; // 0.0002s
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue("id", $last_id);
+            $stmt->execute();
+            $id_koha = $stmt->fetch();
             $id_koha = $id_koha['id'];
 
             //S'il n'y pas d'id_koha, c'est parce que nous arrivons à la fin de l'import (il n'y a pas de plus grand biblionumber)
@@ -112,9 +120,15 @@ class BookController extends Controller
                 //-----------------------------------------------------------
 
                 //On compte le nombre de notices qui ont déjà ce code pour savoir si nous possédons déjà cette notice
-                $sql = "SELECT COUNT(*) as nb FROM prevu.key WHERE prevu = " . $id_koha . " AND library =" . $library;
-                $check = $conn->fetchAssoc($sql);
+                $sql = "SELECT COUNT(*) as nb FROM prevu.key WHERE prevu = :id AND library = :library ";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue("id", $id_koha);
+                $stmt->bindValue("library", $library);
+                $stmt->execute();
+                $check = $stmt->fetch();
                 $check = $check['nb'];
+
+//                $check = 0;
 
                 if ($check < 1) {
 
@@ -122,34 +136,30 @@ class BookController extends Controller
                     //Vérification si la notice existe déjà dans la base pour une autre bibiliothèque cette fois
                     //-----------------------------------------------------------------------------------------------------------------
 
-//                    //si un livre dans une autre bibliothèque mais dans prevu a un titre, un auteur, une année de publication et un isbn, on récupère sa son id KOHA
-//
+                    //si un livre dans une autre bibliothèque mais dans prevu a un titre, un auteur, une année de publication et un isbn, on récupère sa son id KOHA
 
-//                    $sql = "SELECT title, author, isbn FROM biblio WHERE biblionumber =".$id_koha;
-//                    $exist = $conn->fetchAssoc($sql);
-//
-//                    dump($exist);die();
-//
-//                    $sql = "SELECT COUNT(*) as nb FROM prevu.book WHERE title = " . $id_koha . " AND  author = ".." AND isbn = ".." AND library !=" . $library;
-//                    $exist = $conn->fetchAssoc($sql);
-//                    $exist = $exist['nb'];
+                    $sql = "SELECT b.title as title, i.isbn as isbn FROM biblioitems as i INNER JOIN biblio as b ON b.biblionumber = i.biblionumber WHERE b.biblionumber = :id ";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bindValue("id", $id_koha);
+                    $stmt->execute();
+                    $ref = $stmt->fetch();
 
-                    $exist = 0;
+                    //TODO : vérifier cette histoire d'encodage
+                    $title = utf8_encode($ref['title']);
+                    $isbn = utf8_encode(addslashes($ref['isbn']));
 
-                    if ($exist > 1) {
+                    $sql = "SELECT COUNT(*) as nb FROM book as b INNER JOIN `key` as k ON k.prevu = b.id_book WHERE title = :title AND isbn = :isbn AND library != :library AND k.type = 'book' ";
+                    $stmt = $connPrevu->prepare($sql);
+                    $stmt->bindValue("title", $title);
+                    $stmt->bindValue("isbn", $isbn);
+                    $stmt->bindValue("library", $library);
+                    $stmt->execute();
+                    $exist = $stmt->fetch();
+                    $exist = $exist['nb'];
 
-                        dump('Existe déjà donc on ne sauvegarde que les clés');
-                        die();
+//                    $exist = 0;
 
-//                        $sql_code = "INSERT INTO prevu.key(prevu, koha, type, library, date_creation, last_update) VALUES(".$id_prevu.", ".$id_koha.",'book',".$library.", NOW(), NOW() );";
-//                        $sql = $sql_code;
-//                        $stmt = $conn->prepare($sql);
-//                        $stmt->execute();
-
-                    }
-
-                    else {
-
+                    if ($exist < 1) {
                         //-----------------------------------------------------------
                         //Création de la notice
                         //-----------------------------------------------------------
@@ -159,57 +169,108 @@ class BookController extends Controller
 
                                 //Insert des nouveaux auteurs
 
-                                $sql_author = "SELECT EXTRACTVALUE(marcxml,'//datafield[@tag=\"700\"]/subfield[@code=\"a\"]') as lastname, EXTRACTVALUE(marcxml,'//datafield[@tag=\"700\"]/subfield[@code=\"b\"]') as firstname,  EXTRACTVALUE(marcxml,'//datafield[@tag=\"700\"]/subfield[@code=\"f\"]') as dates FROM biblioitems WHERE biblionumber > " . $last_id . " LIMIT 1;";
-                                $author = $conn->fetchAssoc($sql_author);
+                                $sql_author = "SELECT EXTRACTVALUE(marcxml,'//datafield[@tag=\"700\"]/subfield[@code=\"a\"]') as lastname, EXTRACTVALUE(marcxml,'//datafield[@tag=\"700\"]/subfield[@code=\"b\"]') as firstname,  EXTRACTVALUE(marcxml,'//datafield[@tag=\"700\"]/subfield[@code=\"f\"]') as dates FROM biblioitems WHERE biblionumber > :id LIMIT 1;";
+                                $stmt = $conn->prepare($sql_author);
+                                $stmt->bindValue("id", $last_id);
+                                $stmt->execute();
+                                $author = $stmt->fetch();
+
+                                $firstname = utf8_encode(addslashes($author['firstname']));
+                                $lastname = utf8_encode(addslashes($author['lastname']));
+                                $dates = utf8_encode(addslashes($author['dates']));
 
                                 //on vérifie si l'auteur existe déjà dans Prévu
-                                $sql_check = "SELECT COUNT(*) as nb FROM author WHERE firstname = '".utf8_encode(addslashes($author['firstname']))."' AND lastname ='".utf8_encode(addslashes($author['lastname']))."' AND dates = '".utf8_encode(addslashes($author['dates']))."'";
-                                $checkAuthor = $connPrevu->fetchAssoc($sql_check);
+                                $sql_check = "SELECT COUNT(*) as nb FROM author WHERE firstname = :firstname AND lastname = :lastname AND dates = :dates ";
+                                $stmt = $connPrevu->prepare($sql_check);
+                                $stmt->bindValue("firstname", $firstname);
+                                $stmt->bindValue("lastname", $lastname);
+                                $stmt->bindValue("dates", $dates);
+                                $stmt->execute();
+                                $checkAuthor = $stmt->fetch();
                                 $checkAuthor = $checkAuthor['nb'];
 
-                                if($checkAuthor < 1){
-                                //si l'auteur n'est pas déjà dans la BD, on l'ajoute
-                                $sql = "INSERT INTO `author`(`firstname`, `lastname`, `dates`, `date_creation`, `last_update`) VALUES ('".(addslashes($author['firstname']))."','".(addslashes($author['lastname']))."','".utf8_encode(addslashes($author['dates']))."',NOW(),NOW())";;
+                                //Si l'auteur n'existe pas déjà, on insère ses infos
+                                if ($checkAuthor < 1) {
 
-                                $stmt = $connPrevu->prepare($sql);
-                                $stmt->execute();
+                                    $sql = "INSERT INTO author (firstname, lastname, dates) VALUES(:firstname, :lastname, :dates)";
+                                    $stmt = $connPrevu->prepare($sql);
+                                    $stmt->bindValue('firstname', $firstname);
+                                    $stmt->bindValue("lastname", $lastname);
+                                    $stmt->bindValue("dates", $dates);
+                                    $stmt->execute();
+
+                                    $sql = "SELECT id_author as id FROM author ORDER by id_author DESC LIMIT 1";
+                                    $id_author = $connPrevu->fetchAssoc($sql);
+                                    $id_author = $id_author['id'];
+
+                                } //Si l'auteur existe, on récupère son id
+                                else {
+                                    $sql_check = "SELECT id_author as id FROM author WHERE firstname = :firstname AND lastname = :lastname AND dates = :dates LIMIT 1";
+                                    $stmt = $connPrevu->prepare($sql_check);
+                                    $stmt->bindValue("firstname", $firstname);
+                                    $stmt->bindValue("lastname", $lastname);
+                                    $stmt->bindValue("dates", $dates);
+                                    $stmt->execute();
+                                    $id_author = $stmt->fetch();
+                                    $id_author = $id_author['id'];
                                 }
 
-                                //Insert des seconds auteurs
+                                //Insert des notices (attention aux risques d'injection sql
 
-                                //????
-
-                                //Insert des notices
-
-                                $sql_notice = "INSERT INTO prevu.book(id_book, title, author, publicationyear, isbn, date_creation, last_update)(SELECT " . $id_prevu . ", biblio.title, biblio.author, biblioitems.publicationyear, biblioitems.isbn, NOW(), NOW() FROM koha.biblio INNER JOIN koha.biblioitems ON biblio.biblionumber = biblioitems.biblionumber  WHERE biblio.biblionumber > " . $last_id . " LIMIT 1);";
+                                $sql_notice = "INSERT INTO prevu.book(id_book, title, author, publicationyear, isbn, date_creation, last_update)(SELECT :prevu, biblio.title, biblio.author, biblioitems.publicationyear, biblioitems.isbn, NOW(), NOW() FROM koha.biblio INNER JOIN koha.biblioitems ON biblio.biblionumber = biblioitems.biblionumber  WHERE biblio.biblionumber > :last LIMIT 1);";
                                 break;
                             case 2:
-                                $sql_notice = "INSERT INTO prevu.book(id_book, title, author, publicationyear, isbn, date_creation, last_update)(SELECT " . $id_prevu . ", biblio.title, biblio.author, biblioitems.publicationyear, biblioitems.isbn, NOW(), NOW() FROM prevu_rbx.biblio INNER JOIN prevu_rbx.biblioitems ON biblio.biblionumber = biblioitems.biblionumber  WHERE biblio.biblionumber > " . $last_id . " LIMIT 1);";
+                                $sql_notice = "INSERT INTO prevu.book(id_book, title, author, publicationyear, isbn, date_creation, last_update)(SELECT " . $id_prevu . ", biblio.title, biblio.author, biblioitems.publicationyear, biblioitems.isbn, NOW(), NOW() FROM prevu_rbx.biblio INNER JOIN prevu_rbx.biblioitems ON biblio.biblionumber = biblioitems.biblionumber  WHERE biblio.biblionumber > :last LIMIT 1);";
                                 //ajouter les auteurs
                                 break;
-                        }
+                        }//end switch
+
                         //reste CDU, DEWEY : CDU : itemcallnumber d'items
-
-                        $sql = $sql_notice;
-                        $stmt = $conn->prepare($sql);
+                        $stmt = $conn->prepare($sql_notice);
+                        $stmt->bindValue("last", $last_id);
+                        $stmt->bindValue("prevu", $id_prevu);
                         $stmt->execute();
 
-                        //-----------------------------------------------------------
-                        //Ajout de sa clé
-                        //-----------------------------------------------------------
+                    } //enf if : si la notice n'existe pas, on vient d'ajouter son auteur, la notice et le lien de l'auteur avec la notice
 
-                        $sql_code = "INSERT INTO prevu.key(prevu, koha, type, library, date_creation, last_update) VALUES(" . $id_prevu . ", " . $id_koha . ",'book'," . $library . ", NOW(), NOW() );";
-                        $sql = $sql_code;
-                        $stmt = $conn->prepare($sql);
-                        $stmt->execute();
+                    //si le livre existait déjà dans une autre biblio, on ajoute aussi un lien avec cette biblio aussi
 
-                        $cmp = $i;
-                        echo "<p>Nombre de livres sauvegardés : " . $cmp . "</p>"; //A voir
-                    }
+                    //-----------------------------------------------------------
+                    //Ajout de la clé de la notice
+                    //-----------------------------------------------------------
 
-                }
+                    $sql = "INSERT INTO prevu.key(prevu, koha, type, library, date_creation, last_update) VALUES( :id_prevu, :id_koha,:type, :library , NOW(), NOW() );";
 
-            }
+
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bindValue("id_prevu", $id_prevu);
+                    $stmt->bindValue("id_koha", $id_koha);
+                    $stmt->bindValue("type", 'book');
+                    $stmt->bindValue("library", $library);
+                    $stmt->execute();
+
+                    $cmp = $i;
+
+                    //-----------------------------------------------------------
+                    //Ajout du mains auteur : relation book / author dans book
+                    //-----------------------------------------------------------
+                    $sql = "UPDATE book SET id_author = :author WHERE id_book = :book";
+                    $stmt = $connPrevu->prepare($sql);
+                    $stmt->bindValue("author", $id_author);
+                    $stmt->bindValue("book", $id_prevu);
+                    $stmt->execute();
+
+
+                    //-----------------------------------------------------------
+                    //Ajout des auteurs secondaires : relation book / author many to many dans table intermédiaire - TODO
+                    //-----------------------------------------------------------
+
+
+                    echo "<p>Nombre de livres sauvegardés : " . $cmp . ", time :".time()."</p>"; //A voir
+
+                }//end if : si le biblio n'est pas déjà dans cette biblio - s'il l'est, c'est que l'import est déjà fait pour cette notice
+
+            }//end else du début de l'import après vérification qu'il n'a pas déjà été fait
 
         }//endfor
             return $this->render('ImportBundle:Default:index.html.twig');

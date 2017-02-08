@@ -29,10 +29,12 @@
             <ul>
                 <li>Import d'une bibliothèque : <a href="{{ path('import_library_up8') }}">up8</a>, <a href="{{ path('import_library_rbx') }}">rbx</a>
 
-                <li>Import des notices par bibliothèque : <a href="{{ path('import_books', {'biblio' : 'up8'}) }}" onclick="return confirm('Are you sure?');">up8</a>,
-                    <a href="{{ path('import_books', {'biblio' : 'rbx'}) }}" onclick="return confirm('Are you sure?');">rbx</a>, <a href="{{ path('delete_books') }}" onclick="return confirm('Are you sure?');">delete all</a></li></li>
 
-                <li>Import des auteurs par bibliothèque : <a href="{{ path('import_authors', {'biblio' : 'up8'} ) }}">up8</a></li>
+                <li>Import des extras (ccodes, langues, pays, etc.) : <a href="{{ path('import_extra', {'biblio' : 'up8'}) }}">up8</a>, <a href="{{ path('import_extra', {'biblio' : 'rbx'}) }}">rbx</a></li>
+
+                <li>Import des notices et des auteurs par bibliothèque : <a href="{{ path('import_books', {'biblio' : 'up8'}) }}" onclick="return confirm('Are you sure?');">up8</a>,
+                    <a href="{{ path('import_books', {'biblio' : 'rbx'}) }}" onclick="return confirm('Are you sure?');">rbx</a>, <a href="{{ path('delete_books') }}" onclick="return confirm('Are you sure?');">delete all</a></li></li>
+                
 
                 <li>Import des emprunteurs : <a href="">up8</a>, <a href="">rbx</a></li>
 

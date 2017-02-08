@@ -14,6 +14,15 @@ use Doctrine\ORM\Mapping as ORM;
 class Book
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_book", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idBook;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="title", type="text", length=16777215, nullable=true)
@@ -97,14 +106,6 @@ class Book
      */
     private $workAuthor;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_book", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idBook;
 
     /**
      * @var \AppBundle\Entity\Country

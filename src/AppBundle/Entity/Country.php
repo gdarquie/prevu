@@ -15,9 +15,9 @@ class Country
     /**
      * @var string
      *
-     * @ORM\Column(name="pays", type="string", length=45, nullable=true)
+     * @ORM\Column(name="country", type="string", length=45, nullable=true)
      */
-    private $pays;
+    private $country;
 
     /**
      * @var integer
@@ -41,17 +41,17 @@ class Country
     /**
      * @return string
      */
-    public function getPays()
+    public function getCountry()
     {
-        return $this->pays;
+        return $this->country;
     }
 
     /**
-     * @param string $pays
+     * @param string $country
      */
-    public function setPays($pays)
+    public function setCountry($country)
     {
-        $this->pays = $pays;
+        $this->country = $country;
     }
 
     /**
