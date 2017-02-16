@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e14c6e74-4351-472b-9071-3e2206d10c5f" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ImportBundle/Controller/AuthorController.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/security.yml" afterPath="$PROJECT_DIR$/app/config/security.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Author.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Author.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Book.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Book.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Borrower.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Borrower.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Country.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Country.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Issue.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Issue.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Item.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Item.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EcranBundle/Controller/EcranController.php" afterPath="$PROJECT_DIR$/src/EcranBundle/Controller/EcranController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ImportBundle/Controller/BookController.php" afterPath="$PROJECT_DIR$/src/ImportBundle/Controller/BookController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ImportBundle/Controller/BorrowerController.php" afterPath="$PROJECT_DIR$/src/ImportBundle/Controller/BorrowerController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ImportBundle/Resources/views/Default/index.html.twig" afterPath="$PROJECT_DIR$/src/ImportBundle/Resources/views/Default/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ImportBundle/Resources/views/Default/stats.html.twig" afterPath="$PROJECT_DIR$/src/ImportBundle/Resources/views/Default/stats.html.twig" />
     </list>
     <ignored path="prevu-dev.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,31 +44,63 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BorrowerController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ImportBundle/Controller/BorrowerController.php">
+      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/Web/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="94" column="0" selection-start-line="94" selection-start-column="2" selection-end-line="108" selection-end-column="61" />
+            <state relative-caret-position="660">
+              <caret line="46" column="49" selection-start-line="46" selection-start-column="49" selection-end-line="46" selection-end-column="49" />
               <folding>
-                <element signature="e#43#100#0#PHP" expanded="true" />
-                <marker date="1486581294000" expanded="true" signature="2292:3397" ph="SELECT MD5(b... borrowers" />
-                <marker date="1486581294000" expanded="true" signature="2309:2504" ph="INSERT INTO `borrower`... " />
-                <marker date="1486581294000" expanded="true" signature="2309:2505" ph="INSERT INTO borrower... " />
-                <marker date="1486581294000" expanded="true" signature="2405:2504" ph="SELECT MD5(b... " />
-                <marker date="1486581294000" expanded="true" signature="2867:3067" ph="INSERT INTO `item`... " />
-                <marker date="1486581294000" expanded="true" signature="2948:3066" ph="SELECT p.pre... items" />
-                <marker date="1486581294000" expanded="true" signature="3555:3895" ph="INSERT INTO `issue`... " />
-                <marker date="1486581294000" expanded="true" signature="3704:3893" ph="SELECT id_bo... old_issues" />
+                <marker date="1485202228000" expanded="true" signature="451:519" ph="SELECT COUNT... AppBundle" />
+                <marker date="1485202228000" expanded="true" signature="687:739" ph="SELECT COUNT... AppBundle" />
+                <marker date="1485202228000" expanded="true" signature="867:915" ph="SELECT SUM(b... AppBundle" />
+                <marker date="1485202228000" expanded="true" signature="1037:1095" ph="SELECT COUNT... AppBundle" />
+                <marker date="1485202228000" expanded="true" signature="1217:1267" ph="SELECT SUM(b... AppBundle" />
+                <marker date="1485202228000" expanded="true" signature="1387:1461" ph="SELECT i.ret... AppBundle" />
+                <marker date="1485202228000" expanded="true" signature="1601:1676" ph="SELECT i.ret... AppBundle" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Item.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Item.php">
+      <file leaf-file-name="EcranController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EcranBundle/Controller/EcranController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="534">
-              <caret line="156" column="7" selection-start-line="156" selection-start-column="7" selection-end-line="156" selection-end-column="7" />
+            <state relative-caret-position="701">
+              <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+              <folding>
+                <marker date="1486649538000" expanded="true" signature="432:491" ph="SELECT COUNT... " />
+                <marker date="1486649538000" expanded="true" signature="614:682" ph="SELECT COUNT... AppBundle" />
+                <marker date="1486649538000" expanded="true" signature="815:897" ph="SELECT MAX(i... " />
+                <marker date="1486649538000" expanded="true" signature="1021:1083" ph="SELECT COUNT... AppBundle" />
+                <marker date="1486649538000" expanded="true" signature="1235:1368" ph="SELECT i.ite... AppBundle" />
+                <marker date="1486649538000" expanded="true" signature="1613:1700" ph="SELECT COUNT... AppBundle" />
+                <marker date="1486649538000" expanded="true" signature="1852:1976" ph="SELECT b.tit... AppBundle" />
+                <marker date="1486649538000" expanded="true" signature="2152:2350" ph="SELECT b.pub... AppBundle" />
+                <marker date="1486649538000" expanded="true" signature="2529:2720" ph="SELECT FLOOR... AppBundle" />
+                <marker date="1486649538000" expanded="true" signature="3540:3614" ph="SELECT b FRO... AppBundle" />
+                <marker date="1486649538000" expanded="true" signature="3540:3645" ph="SELECT b, a AppBundle" />
+                <marker date="1486649538000" expanded="true" signature="3540:3647" ph="SELECT b FRO... AppBundle" />
+                <marker date="1486649538000" expanded="true" signature="3797:3916" ph="SELECT a FRO... AppBundle" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="security.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/config/security.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="28" column="47" selection-start-line="28" selection-start-column="47" selection-end-line="28" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Author.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Author.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2565">
+              <caret line="171" column="0" selection-start-line="171" selection-start-column="0" selection-end-line="171" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -77,28 +109,18 @@
       <file leaf-file-name="Book.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Book.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="78" column="19" selection-start-line="78" selection-start-column="17" selection-end-line="78" selection-end-column="19" />
+            <state relative-caret-position="2445">
+              <caret line="163" column="26" selection-start-line="163" selection-start-column="26" selection-end-line="163" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Key.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Key.php">
+      <file leaf-file-name="pret.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EcranBundle/Resources/views/Article/pret.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/index.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1080">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="825">
+              <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="61" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -107,8 +129,8 @@
       <file leaf-file-name="Issue.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Issue.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="98" selection-end-column="20" />
+            <state relative-caret-position="6900">
+              <caret line="460" column="0" selection-start-line="460" selection-start-column="0" selection-end-line="460" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -117,35 +139,41 @@
       <file leaf-file-name="BookController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ImportBundle/Controller/BookController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1125">
-              <caret line="5" column="59" selection-start-line="5" selection-start-column="59" selection-end-line="5" selection-end-column="59" />
+            <state relative-caret-position="3045">
+              <caret line="204" column="55" selection-start-line="204" selection-start-column="55" selection-end-line="204" selection-end-column="55" />
               <folding>
                 <element signature="e#43#100#0#PHP" expanded="true" />
-                <marker date="1486508774000" expanded="true" signature="2224:2256" ph="SELECT COUNT... biblio" />
-                <marker date="1486508774000" expanded="true" signature="2779:2861" ph="SELECT koha key" />
-                <marker date="1486508774000" expanded="true" signature="3356:3426" ph="SELECT bibli... biblio" />
-                <marker date="1486508774000" expanded="true" signature="4025:4066" ph="SELECT MAX(i... book" />
-                <marker date="1486508774000" expanded="true" signature="4544:4612" ph="SELECT COUNT... key" />
-                <marker date="1486508774000" expanded="true" signature="4544:4621" ph="SELECT COUNT... key" />
-                <marker date="1486508774000" expanded="true" signature="5537:5679" ph="SELECT b.tit... biblioitems" />
-                <marker date="1486508774000" expanded="true" signature="5537:5683" ph="SELECT b.tit... biblioitems" />
-                <marker date="1486508774000" expanded="true" signature="6090:6253" ph="SELECT COUNT... book" />
-                <marker date="1486508774000" expanded="true" signature="7091:7400" ph="SELECT EXTRA... biblioitems" />
-                <marker date="1486508774000" expanded="true" signature="8041:8119" ph="SELECT COUNT... author" />
-                <marker date="1486508774000" expanded="true" signature="8041:8147" ph="SELECT COUNT... author" />
-                <marker date="1486508774000" expanded="true" signature="8806:8891" ph="INSERT INTO author... " />
-                <marker date="1486508774000" expanded="true" signature="9291:9357" ph="SELECT id_au... author" />
-                <marker date="1486508774000" expanded="true" signature="9671:9786" ph="SELECT id_au... author" />
-                <marker date="1486508774000" expanded="true" signature="10454:10794" ph="INSERT INTO prevu.book... " />
-                <marker date="1486508774000" expanded="true" signature="10552:10793" ph="SELECT ${$id... biblio" />
-                <marker date="1486508774000" expanded="true" signature="10920:11281" ph="INSERT INTO prevu.book... " />
-                <marker date="1486508774000" expanded="true" signature="11018:11280" ph="SELECT ${$id... biblio" />
-                <marker date="1486508774000" expanded="true" signature="12221:12306" ph="INSERT INTO prevu.key... " />
-                <marker date="1486508774000" expanded="true" signature="12221:12317" ph="INSERT INTO prevu.key... " />
-                <marker date="1486508774000" expanded="true" signature="12221:12359" ph="INSERT INTO prevu.key... " />
-                <marker date="1486508774000" expanded="true" signature="12990:13047" ph="UPDATE book " />
-                <marker date="1486508774000" expanded="true" signature="14825:14842" ph="DELETE FROM " />
-                <marker date="1486508774000" expanded="true" signature="14879:14897" ph="DELETE FROM " />
+                <marker date="1487148022000" expanded="true" signature="2224:2256" ph="SELECT COUNT... biblio" />
+                <marker date="1487148022000" expanded="true" signature="2779:2861" ph="SELECT koha key" />
+                <marker date="1487148022000" expanded="true" signature="3356:3426" ph="SELECT bibli... biblio" />
+                <marker date="1487148022000" expanded="true" signature="4025:4066" ph="SELECT MAX(i... book" />
+                <marker date="1487148022000" expanded="true" signature="4544:4612" ph="SELECT COUNT... key" />
+                <marker date="1487148022000" expanded="true" signature="4544:4621" ph="SELECT COUNT... key" />
+                <marker date="1487148022000" expanded="true" signature="5537:5679" ph="SELECT b.tit... biblioitems" />
+                <marker date="1487148022000" expanded="true" signature="5537:5683" ph="SELECT b.tit... biblioitems" />
+                <marker date="1487148022000" expanded="true" signature="6090:6253" ph="SELECT COUNT... book" />
+                <marker date="1487148022000" expanded="true" signature="7126:7435" ph="SELECT EXTRA... biblioitems" />
+                <marker date="1487148022000" expanded="true" signature="8076:8154" ph="SELECT COUNT... author" />
+                <marker date="1487148022000" expanded="true" signature="8076:8182" ph="SELECT COUNT... author" />
+                <marker date="1487148022000" expanded="true" signature="8841:8968" ph="INSERT INTO author... " />
+                <marker date="1487148022000" expanded="true" signature="8967:8968" ph="INSERT INTO author... " />
+                <marker date="1487148022000" expanded="true" signature="9368:9434" ph="SELECT id_au... author" />
+                <marker date="1487148022000" expanded="true" signature="9748:9863" ph="SELECT id_au... author" />
+                <marker date="1487148022000" expanded="true" signature="10531:10871" ph="INSERT INTO prevu.book... " />
+                <marker date="1487148022000" expanded="true" signature="10629:10870" ph="SELECT ${$id... biblio" />
+                <marker date="1487148022000" expanded="true" signature="11099:11408" ph="SELECT EXTRA... biblioitems" />
+                <marker date="1487148022000" expanded="true" signature="12049:12155" ph="SELECT COUNT... author" />
+                <marker date="1487148022000" expanded="true" signature="12814:12941" ph="INSERT INTO author... " />
+                <marker date="1487148022000" expanded="true" signature="13341:13407" ph="SELECT id_au... author" />
+                <marker date="1487148022000" expanded="true" signature="13721:13836" ph="SELECT id_au... author" />
+                <marker date="1487148022000" expanded="true" signature="14464:14814" ph="INSERT INTO prevu.book... " />
+                <marker date="1487148022000" expanded="true" signature="14562:14813" ph="SELECT ${$id... biblio" />
+                <marker date="1487148022000" expanded="true" signature="15701:15786" ph="INSERT INTO prevu.key... " />
+                <marker date="1487148022000" expanded="true" signature="15701:15797" ph="INSERT INTO prevu.key... " />
+                <marker date="1487148022000" expanded="true" signature="15701:15839" ph="INSERT INTO prevu.key... " />
+                <marker date="1487148022000" expanded="true" signature="16470:16527" ph="UPDATE book " />
+                <marker date="1487148022000" expanded="true" signature="18307:18324" ph="DELETE FROM " />
+                <marker date="1487148022000" expanded="true" signature="18361:18379" ph="DELETE FROM " />
               </folding>
             </state>
           </provider>
@@ -154,28 +182,8 @@
       <file leaf-file-name="Borrower.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Borrower.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1995">
+            <state relative-caret-position="2220">
               <caret line="148" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="stats.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ImportBundle/Resources/views/Default/stats.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="490">
-              <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ImportBundle/Resources/views/Default/index.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="38" column="88" selection-start-line="38" selection-start-column="88" selection-end-line="38" selection-end-column="88" />
               <folding />
             </state>
           </provider>
@@ -189,8 +197,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/PrItemtype.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/PrLangue.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/PrMatiere.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/PrPays.php" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Controller/DefaultController.php" />
@@ -205,18 +211,15 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Books.php" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Controller/AdminController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/Api/StatsController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/Web/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Amazon.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Itemtype.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Langue.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Pays.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Code.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/Web/WorksController.php" />
-        <option value="$PROJECT_DIR$/src/EcranBundle/Controller/EcranController.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
         <option value="$PROJECT_DIR$/web/import/request.sql" />
         <option value="$PROJECT_DIR$/src/ImportBundle/ImportBundle.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Author.php" />
         <option value="$PROJECT_DIR$/src/ImportBundle/Entity/Biblio.php" />
         <option value="$PROJECT_DIR$/src/ImportBundle/Resources/views/Book/index.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Library.php" />
@@ -225,7 +228,6 @@
         <option value="$PROJECT_DIR$/app/DoctrineMigrations/Version20170131163009.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Language.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Key.php" />
-        <option value="$PROJECT_DIR$/app/config/security.yml" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/app/config/parameters.yml" />
         <option value="$PROJECT_DIR$/src/ImportBundle/Controller/DefaultController.php" />
@@ -235,11 +237,17 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Country.php" />
         <option value="$PROJECT_DIR$/src/ImportBundle/Controller/ExtraController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Borrower.php" />
-        <option value="$PROJECT_DIR$/src/ImportBundle/Controller/BookController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Issue.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Book.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Item.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Issue.php" />
+        <option value="$PROJECT_DIR$/app/Resources/views/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/Web/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/ImportBundle/Controller/BorrowerController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Book.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Author.php" />
+        <option value="$PROJECT_DIR$/src/EcranBundle/Resources/views/Article/pret.html.twig" />
+        <option value="$PROJECT_DIR$/src/EcranBundle/Controller/EcranController.php" />
+        <option value="$PROJECT_DIR$/src/ImportBundle/Controller/BookController.php" />
+        <option value="$PROJECT_DIR$/app/config/security.yml" />
       </list>
     </option>
   </component>
@@ -281,6 +289,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -395,206 +404,6 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Library" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prevu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prevu" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImportBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Default" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prevu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prevu" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImportBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Book" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prevu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prevu" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImportBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prevu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prevu" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImportBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prevu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prevu" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prevu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prevu" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Entity" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prevu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prevu" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Web" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prevu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prevu" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="Controller" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -673,7 +482,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -681,18 +489,19 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/ImportBundle/Controller" />
-      <recent name="$PROJECT_DIR$/src/EcranBundle/Resources/views" />
-      <recent name="$PROJECT_DIR$/web" />
-      <recent name="$PROJECT_DIR$/app/Resources" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/app/Resources/FOSUserBundle/views" />
       <recent name="$PROJECT_DIR$/src/AppBundle/Controller/Api" />
       <recent name="$PROJECT_DIR$/src/AppBundle" />
       <recent name="$PROJECT_DIR$/src/AppBundle/Controller/Web" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/EcranBundle/Resources/views/Article" />
+      <recent name="$PROJECT_DIR$/src/ImportBundle/Controller" />
+      <recent name="$PROJECT_DIR$/src/EcranBundle/Resources/views" />
+      <recent name="$PROJECT_DIR$/web" />
+      <recent name="$PROJECT_DIR$/app/Resources" />
     </key>
   </component>
   <component name="RunManager" selected="PHPUnit.ImportBundle">
@@ -787,18 +596,24 @@
       <workItem from="1486202571067" duration="30252000" />
       <workItem from="1486343050661" duration="2369000" />
       <workItem from="1486390045602" duration="19260000" />
-      <workItem from="1486500526072" duration="13948000" />
+      <workItem from="1486500526072" duration="27099000" />
+      <workItem from="1486655153071" duration="1000" />
+      <workItem from="1486662941998" duration="36000" />
+      <workItem from="1486741511745" duration="30000" />
+      <workItem from="1486835387489" duration="744000" />
+      <workItem from="1487145244811" duration="3094000" />
+      <workItem from="1487235309237" duration="303000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="227167000" />
+    <option name="totallyTimeSpent" value="244526000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24606581" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26752505" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -833,34 +648,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Projets/2014/Prevu/Année03/Requetes/2016-11-01_importKoha.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="10" column="146" selection-start-line="10" selection-start-column="101" selection-end-line="10" selection-end-column="146" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/Web/WorksController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1740">
-          <caret line="118" column="17" selection-start-line="118" selection-start-column="12" selection-end-line="118" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/EcranBundle/Controller/EcranController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="685">
-          <caret line="57" column="38" selection-start-line="57" selection-start-column="38" selection-end-line="57" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ImportBundle/ImportBundle.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ImportBundle/Resources/config/doctrine/Amazon.orm.yml" />
     <entry file="file://$PROJECT_DIR$/src/ImportBundle/Resources/config/services.yml">
       <provider selected="true" editor-type-id="text-editor">
@@ -873,15 +660,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Author.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -947,28 +725,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/Web/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="30" column="54" selection-start-line="29" selection-start-column="6" selection-end-line="30" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ImportBundle/Resources/views/Book/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/Web/SearchController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="30" column="111" selection-start-line="30" selection-start-column="111" selection-end-line="30" selection-end-column="111" />
-          <folding>
-            <marker date="1485192533000" expanded="true" signature="710:817" ph="SELECT b.idB... AppBundle" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1002,13 +762,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/security.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="26" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/services.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1021,13 +774,6 @@
         <state relative-caret-position="279">
           <caret line="74" column="0" selection-start-line="74" selection-start-column="1" selection-end-line="81" selection-end-column="31" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1064,7 +810,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1560">
           <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1072,15 +817,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/import/request.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="241" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1089,7 +825,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1115,7 +850,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
           <caret line="38" column="88" selection-start-line="38" selection-start-column="88" selection-end-line="38" selection-end-column="88" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1123,108 +857,217 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="490">
           <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ImportBundle/Controller/BookController.php">
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Item.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1125">
-          <caret line="5" column="59" selection-start-line="5" selection-start-column="59" selection-end-line="5" selection-end-column="59" />
+        <state relative-caret-position="399">
+          <caret line="170" column="21" selection-start-line="170" selection-start-column="21" selection-end-line="170" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/import/request.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ImportBundle/Controller/BorrowerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="129" column="0" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
           <folding>
             <element signature="e#43#100#0#PHP" expanded="true" />
-            <marker date="1486508774000" expanded="true" signature="2224:2256" ph="SELECT COUNT... biblio" />
-            <marker date="1486508774000" expanded="true" signature="2779:2861" ph="SELECT koha key" />
-            <marker date="1486508774000" expanded="true" signature="3356:3426" ph="SELECT bibli... biblio" />
-            <marker date="1486508774000" expanded="true" signature="4025:4066" ph="SELECT MAX(i... book" />
-            <marker date="1486508774000" expanded="true" signature="4544:4612" ph="SELECT COUNT... key" />
-            <marker date="1486508774000" expanded="true" signature="4544:4621" ph="SELECT COUNT... key" />
-            <marker date="1486508774000" expanded="true" signature="5537:5679" ph="SELECT b.tit... biblioitems" />
-            <marker date="1486508774000" expanded="true" signature="5537:5683" ph="SELECT b.tit... biblioitems" />
-            <marker date="1486508774000" expanded="true" signature="6090:6253" ph="SELECT COUNT... book" />
-            <marker date="1486508774000" expanded="true" signature="7091:7400" ph="SELECT EXTRA... biblioitems" />
-            <marker date="1486508774000" expanded="true" signature="8041:8119" ph="SELECT COUNT... author" />
-            <marker date="1486508774000" expanded="true" signature="8041:8147" ph="SELECT COUNT... author" />
-            <marker date="1486508774000" expanded="true" signature="8806:8891" ph="INSERT INTO author... " />
-            <marker date="1486508774000" expanded="true" signature="9291:9357" ph="SELECT id_au... author" />
-            <marker date="1486508774000" expanded="true" signature="9671:9786" ph="SELECT id_au... author" />
-            <marker date="1486508774000" expanded="true" signature="10454:10794" ph="INSERT INTO prevu.book... " />
-            <marker date="1486508774000" expanded="true" signature="10552:10793" ph="SELECT ${$id... biblio" />
-            <marker date="1486508774000" expanded="true" signature="10920:11281" ph="INSERT INTO prevu.book... " />
-            <marker date="1486508774000" expanded="true" signature="11018:11280" ph="SELECT ${$id... biblio" />
-            <marker date="1486508774000" expanded="true" signature="12221:12306" ph="INSERT INTO prevu.key... " />
-            <marker date="1486508774000" expanded="true" signature="12221:12317" ph="INSERT INTO prevu.key... " />
-            <marker date="1486508774000" expanded="true" signature="12221:12359" ph="INSERT INTO prevu.key... " />
-            <marker date="1486508774000" expanded="true" signature="12990:13047" ph="UPDATE book " />
-            <marker date="1486508774000" expanded="true" signature="14825:14842" ph="DELETE FROM " />
-            <marker date="1486508774000" expanded="true" signature="14879:14897" ph="DELETE FROM " />
+            <marker date="1486636807000" expanded="true" signature="2292:3415" ph="SELECT MD5(b... borrowers" />
+            <marker date="1486636807000" expanded="true" signature="2309:2504" ph="INSERT INTO `borrower`... " />
+            <marker date="1486636807000" expanded="true" signature="2309:2505" ph="INSERT INTO borrower... " />
+            <marker date="1486636807000" expanded="true" signature="2405:2504" ph="SELECT MD5(b... " />
+            <marker date="1486636807000" expanded="true" signature="2867:3086" ph="INSERT INTO `item`... " />
+            <marker date="1486636807000" expanded="true" signature="2954:3085" ph="SELECT p.pre... items" />
+            <marker date="1486636807000" expanded="true" signature="3573:3913" ph="INSERT INTO `issue`... " />
+            <marker date="1486636807000" expanded="true" signature="3722:3911" ph="SELECT id_bo... old_issues" />
+            <marker date="1486636807000" expanded="true" signature="4538:4885" ph="INSERT INTO prevu.issue... " />
+            <marker date="1486636807000" expanded="true" signature="4683:4884" ph="SELECT i.bor... old_issues" />
+            <marker date="1486636807000" expanded="true" signature="5253:5367" ph="UPDATE issue... " />
+            <marker date="1486636807000" expanded="true" signature="5388:5477" ph="SELECT b.id_... issue" />
+            <marker date="1486636807000" expanded="true" signature="5652:5722" ph="SELECT i.id_... issue" />
+            <marker date="1486636807000" expanded="true" signature="5741:5840" ph="UPDATE issue... " />
+            <marker date="1486636807000" expanded="true" signature="5903:6031" ph="SELECT b.tit... book" />
+            <marker date="1486636807000" expanded="true" signature="6050:6160" ph="UPDATE `book... " />
+            <marker date="1486636807000" expanded="true" signature="6080:6158" ph="SELECT COUNT... issue" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EcranBundle/EcranBundle.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="52" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Key.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="28" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1080">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="330">
+          <caret line="45" column="77" selection-start-line="45" selection-start-column="58" selection-end-line="45" selection-end-column="77" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Issue.php">
+    <entry file="file://$PROJECT_DIR$/src/EcranBundle/Resources/views/Article/annee.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="98" selection-end-column="20" />
+        <state relative-caret-position="285">
+          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/Web/SearchController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="30" column="111" selection-start-line="30" selection-start-column="111" selection-end-line="30" selection-end-column="111" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Borrower.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2220">
+          <caret line="148" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Book.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="78" column="19" selection-start-line="78" selection-start-column="17" selection-end-line="78" selection-end-column="19" />
+        <state relative-caret-position="2445">
+          <caret line="163" column="26" selection-start-line="163" selection-start-column="26" selection-end-line="163" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Key.php">
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Issue.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+        <state relative-caret-position="6900">
+          <caret line="460" column="0" selection-start-line="460" selection-start-column="0" selection-end-line="460" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Borrower.php">
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Author.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1995">
-          <caret line="148" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
+        <state relative-caret-position="2565">
+          <caret line="171" column="0" selection-start-line="171" selection-start-column="0" selection-end-line="171" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Item.php">
+    <entry file="file://$PROJECT_DIR$/src/EcranBundle/Resources/views/Article/pret.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="156" column="7" selection-start-line="156" selection-start-column="7" selection-end-line="156" selection-end-column="7" />
+        <state relative-caret-position="825">
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="61" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ImportBundle/Controller/BorrowerController.php">
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/Web/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="94" column="0" selection-start-line="94" selection-start-column="2" selection-end-line="108" selection-end-column="61" />
+        <state relative-caret-position="660">
+          <caret line="46" column="49" selection-start-line="46" selection-start-column="49" selection-end-line="46" selection-end-column="49" />
+          <folding>
+            <marker date="1485202228000" expanded="true" signature="451:519" ph="SELECT COUNT... AppBundle" />
+            <marker date="1485202228000" expanded="true" signature="687:739" ph="SELECT COUNT... AppBundle" />
+            <marker date="1485202228000" expanded="true" signature="867:915" ph="SELECT SUM(b... AppBundle" />
+            <marker date="1485202228000" expanded="true" signature="1037:1095" ph="SELECT COUNT... AppBundle" />
+            <marker date="1485202228000" expanded="true" signature="1217:1267" ph="SELECT SUM(b... AppBundle" />
+            <marker date="1485202228000" expanded="true" signature="1387:1461" ph="SELECT i.ret... AppBundle" />
+            <marker date="1485202228000" expanded="true" signature="1601:1676" ph="SELECT i.ret... AppBundle" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ImportBundle/Controller/BookController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3045">
+          <caret line="204" column="55" selection-start-line="204" selection-start-column="55" selection-end-line="204" selection-end-column="55" />
           <folding>
             <element signature="e#43#100#0#PHP" expanded="true" />
-            <marker date="1486581294000" expanded="true" signature="2292:3397" ph="SELECT MD5(b... borrowers" />
-            <marker date="1486581294000" expanded="true" signature="2309:2504" ph="INSERT INTO `borrower`... " />
-            <marker date="1486581294000" expanded="true" signature="2309:2505" ph="INSERT INTO borrower... " />
-            <marker date="1486581294000" expanded="true" signature="2405:2504" ph="SELECT MD5(b... " />
-            <marker date="1486581294000" expanded="true" signature="2867:3067" ph="INSERT INTO `item`... " />
-            <marker date="1486581294000" expanded="true" signature="2948:3066" ph="SELECT p.pre... items" />
-            <marker date="1486581294000" expanded="true" signature="3555:3895" ph="INSERT INTO `issue`... " />
-            <marker date="1486581294000" expanded="true" signature="3704:3893" ph="SELECT id_bo... old_issues" />
+            <marker date="1487148022000" expanded="true" signature="2224:2256" ph="SELECT COUNT... biblio" />
+            <marker date="1487148022000" expanded="true" signature="2779:2861" ph="SELECT koha key" />
+            <marker date="1487148022000" expanded="true" signature="3356:3426" ph="SELECT bibli... biblio" />
+            <marker date="1487148022000" expanded="true" signature="4025:4066" ph="SELECT MAX(i... book" />
+            <marker date="1487148022000" expanded="true" signature="4544:4612" ph="SELECT COUNT... key" />
+            <marker date="1487148022000" expanded="true" signature="4544:4621" ph="SELECT COUNT... key" />
+            <marker date="1487148022000" expanded="true" signature="5537:5679" ph="SELECT b.tit... biblioitems" />
+            <marker date="1487148022000" expanded="true" signature="5537:5683" ph="SELECT b.tit... biblioitems" />
+            <marker date="1487148022000" expanded="true" signature="6090:6253" ph="SELECT COUNT... book" />
+            <marker date="1487148022000" expanded="true" signature="7126:7435" ph="SELECT EXTRA... biblioitems" />
+            <marker date="1487148022000" expanded="true" signature="8076:8154" ph="SELECT COUNT... author" />
+            <marker date="1487148022000" expanded="true" signature="8076:8182" ph="SELECT COUNT... author" />
+            <marker date="1487148022000" expanded="true" signature="8841:8968" ph="INSERT INTO author... " />
+            <marker date="1487148022000" expanded="true" signature="8967:8968" ph="INSERT INTO author... " />
+            <marker date="1487148022000" expanded="true" signature="9368:9434" ph="SELECT id_au... author" />
+            <marker date="1487148022000" expanded="true" signature="9748:9863" ph="SELECT id_au... author" />
+            <marker date="1487148022000" expanded="true" signature="10531:10871" ph="INSERT INTO prevu.book... " />
+            <marker date="1487148022000" expanded="true" signature="10629:10870" ph="SELECT ${$id... biblio" />
+            <marker date="1487148022000" expanded="true" signature="11099:11408" ph="SELECT EXTRA... biblioitems" />
+            <marker date="1487148022000" expanded="true" signature="12049:12155" ph="SELECT COUNT... author" />
+            <marker date="1487148022000" expanded="true" signature="12814:12941" ph="INSERT INTO author... " />
+            <marker date="1487148022000" expanded="true" signature="13341:13407" ph="SELECT id_au... author" />
+            <marker date="1487148022000" expanded="true" signature="13721:13836" ph="SELECT id_au... author" />
+            <marker date="1487148022000" expanded="true" signature="14464:14814" ph="INSERT INTO prevu.book... " />
+            <marker date="1487148022000" expanded="true" signature="14562:14813" ph="SELECT ${$id... biblio" />
+            <marker date="1487148022000" expanded="true" signature="15701:15786" ph="INSERT INTO prevu.key... " />
+            <marker date="1487148022000" expanded="true" signature="15701:15797" ph="INSERT INTO prevu.key... " />
+            <marker date="1487148022000" expanded="true" signature="15701:15839" ph="INSERT INTO prevu.key... " />
+            <marker date="1487148022000" expanded="true" signature="16470:16527" ph="UPDATE book " />
+            <marker date="1487148022000" expanded="true" signature="18307:18324" ph="DELETE FROM " />
+            <marker date="1487148022000" expanded="true" signature="18361:18379" ph="DELETE FROM " />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EcranBundle/Controller/EcranController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="701">
+          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+          <folding>
+            <marker date="1486649538000" expanded="true" signature="432:491" ph="SELECT COUNT... " />
+            <marker date="1486649538000" expanded="true" signature="614:682" ph="SELECT COUNT... AppBundle" />
+            <marker date="1486649538000" expanded="true" signature="815:897" ph="SELECT MAX(i... " />
+            <marker date="1486649538000" expanded="true" signature="1021:1083" ph="SELECT COUNT... AppBundle" />
+            <marker date="1486649538000" expanded="true" signature="1235:1368" ph="SELECT i.ite... AppBundle" />
+            <marker date="1486649538000" expanded="true" signature="1613:1700" ph="SELECT COUNT... AppBundle" />
+            <marker date="1486649538000" expanded="true" signature="1852:1976" ph="SELECT b.tit... AppBundle" />
+            <marker date="1486649538000" expanded="true" signature="2152:2350" ph="SELECT b.pub... AppBundle" />
+            <marker date="1486649538000" expanded="true" signature="2529:2720" ph="SELECT FLOOR... AppBundle" />
+            <marker date="1486649538000" expanded="true" signature="3540:3614" ph="SELECT b FRO... AppBundle" />
+            <marker date="1486649538000" expanded="true" signature="3540:3645" ph="SELECT b, a AppBundle" />
+            <marker date="1486649538000" expanded="true" signature="3540:3647" ph="SELECT b FRO... AppBundle" />
+            <marker date="1486649538000" expanded="true" signature="3797:3916" ph="SELECT a FRO... AppBundle" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/security.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="47" selection-start-line="28" selection-start-column="47" selection-end-line="28" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>

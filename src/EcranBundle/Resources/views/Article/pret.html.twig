@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .card{
+            padding : 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+        <h1>Les prêts</h1>
+
+        <article class="card">
+            <h2>Les notices les plus empruntées</h2>
+            <p>Nombre de prêts pour chaque livre contenant le mot écran</p>
+
+            <table class="striped">
+                <tr>
+                    <td>Titre</td>
+                    <td>Auteur(s)</td>
+                    <td>Nom auteur</td>
+                    <td>Prénom auteur</td>
+                    <td>Dates auteur</td>
+                    <td>Nombre de prêts</td>
+                </tr>
+
+                {% for item in notices %}
+                    <tr>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.author }}</td>
+                        <td>{{ item.firstAuthor.firstname }}</td>
+                        <td>{{ item.firstAuthor.lastname }}</td>
+                        <td>{{ item.firstAuthor.dates }}</td>
+                        <td>{{ item.issues }}</td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </article>
+
+        <article class="card">
+            <h2>Les auteurs les plus empruntés</h2>
+
+            <p>Peut-être partir sur un nuage de mots clés</p>
+
+            <table class="striped">
+                <tr>
+                    <td>Nom</td>
+                    <td>Prénom</td>
+                    <td>Emprunts</td>
+                </tr>
+                {#{% for item in authors %}#}
+                {#<tr>#}
+                    {#<td>{{ item.lastname }}</td>#}
+                    {#<td>{{ item.firstname }}</td>#}
+                    {#<td>{{ item.issue }}</td>#}
+                {#</tr>#}
+                {#{% endfor %}#}
+            </table>
+        </article>
+    </section>
+{% endblock %}

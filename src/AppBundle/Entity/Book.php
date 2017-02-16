@@ -156,7 +156,7 @@ class Book
     /**
      * @var \AppBundle\Entity\Author
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Author")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Author", inversedBy="books")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_author", referencedColumnName="id_author")
      * })

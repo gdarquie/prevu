@@ -165,6 +165,8 @@ class BookController extends Controller
                         //-----------------------------------------------------------
 
                         switch ($library) {
+
+                            //UP8
                             case 1:
 
                                 //Insert des nouveaux auteurs
@@ -192,7 +194,7 @@ class BookController extends Controller
                                 //Si l'auteur n'existe pas déjà, on insère ses infos
                                 if ($checkAuthor < 1) {
 
-                                    $sql = "INSERT INTO author (firstname, lastname, dates) VALUES(:firstname, :lastname, :dates)";
+                                    $sql = "INSERT INTO author (firstname, lastname, dates, NOW(), NOW()) VALUES(:firstname, :lastname, :dates, date_creation, last_update)";
                                     $stmt = $connPrevu->prepare($sql);
                                     $stmt->bindValue('firstname', $firstname);
                                     $stmt->bindValue("lastname", $lastname);
@@ -219,16 +221,67 @@ class BookController extends Controller
 
                                 $sql_notice = "INSERT INTO prevu.book(id_book, title, author, publicationyear, isbn, date_creation, last_update)(SELECT :prevu, biblio.title, biblio.author, biblioitems.publicationyear, biblioitems.isbn, NOW(), NOW() FROM koha.biblio INNER JOIN koha.biblioitems ON biblio.biblionumber = biblioitems.biblionumber  WHERE biblio.biblionumber > :last LIMIT 1);";
                                 break;
+
+                            //Roubais
                             case 2:
-                                $sql_notice = "INSERT INTO prevu.book(id_book, title, author, publicationyear, isbn, date_creation, last_update)(SELECT " . $id_prevu . ", biblio.title, biblio.author, biblioitems.publicationyear, biblioitems.isbn, NOW(), NOW() FROM prevu_rbx.biblio INNER JOIN prevu_rbx.biblioitems ON biblio.biblionumber = biblioitems.biblionumber  WHERE biblio.biblionumber > :last LIMIT 1);";
-                                //ajouter les auteurs
+                                //Insert des nouveaux auteurs
+
+                                $sql_author = "SELECT EXTRACTVALUE(marcxml,'//datafield[@tag=\"700\"]/subfield[@code=\"a\"]') as lastname, EXTRACTVALUE(marcxml,'//datafield[@tag=\"700\"]/subfield[@code=\"b\"]') as firstname,  EXTRACTVALUE(marcxml,'//datafield[@tag=\"700\"]/subfield[@code=\"f\"]') as dates FROM biblioitems WHERE biblionumber > :id LIMIT 1;";
+                                $stmt = $conn->prepare($sql_author);
+                                $stmt->bindValue("id", $last_id);
+                                $stmt->execute();
+                                $author = $stmt->fetch();
+
+                                $firstname = utf8_encode(addslashes($author['firstname']));
+                                $lastname = utf8_encode(addslashes($author['lastname']));
+                                $dates = utf8_encode(addslashes($author['dates']));
+
+                                //on vérifie si l'auteur existe déjà dans Prévu
+                                $sql_check = "SELECT COUNT(*) as nb FROM author WHERE firstname = :firstname AND lastname = :lastname AND dates = :dates ";
+                                $stmt = $connPrevu->prepare($sql_check);
+                                $stmt->bindValue("firstname", $firstname);
+                                $stmt->bindValue("lastname", $lastname);
+                                $stmt->bindValue("dates", $dates);
+                                $stmt->execute();
+                                $checkAuthor = $stmt->fetch();
+                                $checkAuthor = $checkAuthor['nb'];
+
+                                //Si l'auteur n'existe pas déjà, on insère ses infos
+                                if ($checkAuthor < 1) {
+
+                                    $sql = "INSERT INTO author (firstname, lastname, dates, NOW(), NOW()) VALUES(:firstname, :lastname, :dates, date_creation, last_update)";
+                                    $stmt = $connPrevu->prepare($sql);
+                                    $stmt->bindValue('firstname', $firstname);
+                                    $stmt->bindValue("lastname", $lastname);
+                                    $stmt->bindValue("dates", $dates);
+                                    $stmt->execute();
+
+                                    $sql = "SELECT id_author as id FROM author ORDER by id_author DESC LIMIT 1";
+                                    $id_author = $connPrevu->fetchAssoc($sql);
+                                    $id_author = $id_author['id'];
+
+                                } //Si l'auteur existe, on récupère son id
+                                else {
+                                    $sql_check = "SELECT id_author as id FROM author WHERE firstname = :firstname AND lastname = :lastname AND dates = :dates LIMIT 1";
+                                    $stmt = $connPrevu->prepare($sql_check);
+                                    $stmt->bindValue("firstname", $firstname);
+                                    $stmt->bindValue("lastname", $lastname);
+                                    $stmt->bindValue("dates", $dates);
+                                    $stmt->execute();
+                                    $id_author = $stmt->fetch();
+                                    $id_author = $id_author['id'];
+                                }
+
+                                //insert des notices
+                                $sql_notice = "INSERT INTO prevu.book(id_book, title, author, publicationyear, isbn, date_creation, last_update)(SELECT :prevu, biblio.title, biblio.author, biblioitems.publicationyear, biblioitems.isbn, NOW(), NOW() FROM prevu_rbx.biblio INNER JOIN prevu_rbx.biblioitems ON biblio.biblionumber = biblioitems.biblionumber  WHERE biblio.biblionumber > :last LIMIT 1);";
+
                                 break;
                         }//end switch
 
                         //reste CDU, DEWEY : CDU : itemcallnumber d'items
                         $stmt = $conn->prepare($sql_notice);
-                        $stmt->bindValue("last", $last_id);
                         $stmt->bindValue("prevu", $id_prevu);
+                        $stmt->bindValue("last", $last_id);
                         $stmt->execute();
 
                     } //enf if : si la notice n'existe pas, on vient d'ajouter son auteur, la notice et le lien de l'auteur avec la notice
@@ -286,6 +339,8 @@ class BookController extends Controller
             $roles = $this->getUser()->getRoles();
 
             $count = count($roles);
+
+
 
             foreach ($roles as $role ){
 

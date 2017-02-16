@@ -52,6 +52,11 @@ class Author
     private $dates;
 
     /**
+     * @ORM\OneToMany(targetEntity="Book", mappedBy="first_author")
+     */
+    private $books;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $date_creation;
@@ -149,6 +154,21 @@ class Author
         $this->last_update = $last_update;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getBooks()
+    {
+        return $this->books;
+    }
+
+    /**
+     * @param mixed $books
+     */
+    public function setBooks($books)
+    {
+        $this->books = $books;
+    }
 
 
 }

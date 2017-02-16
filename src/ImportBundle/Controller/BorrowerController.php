@@ -78,12 +78,11 @@ class BorrowerController extends Controller
         //Import des items
         //-----------------------------------------------------------
 
-        $sql = "INSERT INTO `item`(`id_book`, `price`, library, `date_creation`, `last_update`) (SELECT p.prevu,price, :library, NOW(), NOW() FROM koha.items as i INNER JOIN prevu.key as p ON i.biblionumber = p.koha)";
+        $sql = "INSERT INTO `item`(`id_book`, `price`, koha, library, `date_creation`, `last_update`) (SELECT p.prevu,price, i.itemnumber,:library, NOW(), NOW() FROM koha.items as i INNER JOIN prevu.key as p ON i.biblionumber = p.koha)";
         //INSERT INTO prevu.item(`id_book`, `price`, library, `date_creation`, `last_update`) (SELECT p.prevu,price, 1, NOW(), NOW() FROM koha.items as i INNER JOIN prevu.key as p ON i.biblionumber = p.koha)
         $stmt = $conn->prepare($sql);
         $stmt->bindValue("library", $library);
         $stmt->execute();
-
 
         //--------------------------------------------
         //---------Import des issues
@@ -109,17 +108,39 @@ class BorrowerController extends Controller
 //	INNER JOIN prevu.key as k ON t.`biblionumber` = k.koha  )
 
 
-
-
-
-
-
-
+        $sql = "INSERT INTO prevu.issue(`koha_borrower`, `koha_item`, `sex`, `issuedate`, `returndate`, `renewals`, `date_creation`,`last_update`, `id_library`)(SELECT i.borrowernumber, i.itemnumber, b.sex, i.issuedate, i.returndate, i.renewals, NOW(), NOW(),:library FROM koha.old_issues as i LEFT JOIN koha.borrowers as b ON i.borrowernumber = b.borrowernumber)";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue("library", $library);
         $stmt->execute();
 
 
+        //Update des id borrowers
+
+        //création d'index
+        $sql = "CREATE INDEX index_borrower ON borrower (id_borrower)";
+        $sql = "CREATE INDEX index_borrower ON issue (id_borrower)";
+
+        //Update des id_books
+
+
+        $sql = "UPDATE issue i JOIN borrower b ON b.koha = i.koha_borrower SET i.id_borrower= b.id_borrower WHERE i.id_library = 1";
+
+
+        $sql = "SELECT b.id_borrower FROM issue as i INNER JOIN borrower as b ON b.koha = i.koha_borrower";
+
+
+
+        //Update des id notices
+        $sql = "CREATE INDEX index_item ON item (koha)";
+        $sql = "CREATE INDEX index_item ON issue (koha_item)";
+
+        $sql = "SELECT i.id_book FROM issue i LEFT JOIN item t ON t.koha = i.koha_item";
+        $sql = "UPDATE issue i JOIN item t ON t.koha = i.koha_item SET i.id_book = t.id_book WHERE i.id_library = 1";
+
+        //update des prêts pour les issues
+        $sql = "SELECT b.title, COUNT(*) as nb FROM book as b INNER JOIN issue as i ON i.id_book = b.id_book GROUP BY b.id_book ORDER BY nb DESC";
+
+        $sql ="UPDATE `book` SET `issues`=  (SELECT COUNT(*) FROM issue WHERE issue.id_book = book.id_book GROUP BY id_book );"; //ajouter where library
 
         return $this->render('', array('name' => $name));
     }

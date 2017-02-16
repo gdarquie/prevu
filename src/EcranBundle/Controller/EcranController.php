@@ -73,7 +73,28 @@ class EcranController extends Controller
             'docEcrans' => $docEcrans,
             'docByYear' => $docByYear,
             'docByDecade' => $docByDecade
+        ));
+    }
 
+    /**
+     * @Route("/ecran/prets", name="ecran_prêts")
+     */
+    public function pretAction(){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQuery("SELECT b, a FROM AppBundle:Book b JOIN b.first_author a WHERE b.title LIKE :string ORDER BY b.issues DESC");
+        $query->setParameter('string', '%ecran%')->setMaxResults(1000);
+        $notices = $query->getResult();
+
+        $query = $em->createQuery("SELECT a FROM AppBundle:Author a.firstname as firstname
+//, b.issue as issues JOIN a.books b WHERE b.title LIKE :string");
+//        $query->setParameter('string', '%ecran%')->setMaxResults(1000);
+//        $authors = $query->getResult();
+
+        return $this->render('EcranBundle:Article:pret.html.twig', array(
+            'notices' => $notices
+//            'authors' => $authors
         ));
     }
 }

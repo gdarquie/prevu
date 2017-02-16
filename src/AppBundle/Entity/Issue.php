@@ -108,6 +108,20 @@ class Issue
      */
     private $idlibrary;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="koha_borrower", type="string")
+     */
+    private $koha_borrower;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="koha_item", type="string")
+     */
+    private $koha_item;
+
 
 
     /**
@@ -411,5 +425,39 @@ class Issue
     {
         $this->idlibrary = $idlibrary;
     }
+
+    /**
+     * @return string
+     */
+    public function getKohaBorrower()
+    {
+        return $this->koha_borrower;
+    }
+
+    /**
+     * @param string $koha_borrower
+     */
+    public function setKohaBorrower($koha_borrower)
+    {
+        $this->koha_borrower = $koha_borrower;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKohaItem()
+    {
+        return $this->koha_item;
+    }
+
+    /**
+     * @param string $koha_item
+     */
+    public function setKohaItem($koha_item)
+    {
+        $this->koha_item = $koha_item;
+    }
+
+
 
 }

@@ -44,6 +44,13 @@ class Item
     private $price;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="koha", type="string")
+     */
+    private $koha;
+
+    /**
      * @var \AppBundle\Entity\Library
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Library")
@@ -159,6 +166,23 @@ class Item
     {
         $this->library = $library;
     }
+
+    /**
+     * @return string
+     */
+    public function getKoha()
+    {
+        return $this->koha;
+    }
+
+    /**
+     * @param string $koha
+     */
+    public function setKoha($koha)
+    {
+        $this->koha = $koha;
+    }
+
 
 
 }
