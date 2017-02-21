@@ -89,7 +89,7 @@ class Issue
     private $idborrower;
 
     /**
-     * @var \AppBundle\Entity\Books
+     * @var \AppBundle\Entity\Book
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Book")
      * @ORM\JoinColumns({
