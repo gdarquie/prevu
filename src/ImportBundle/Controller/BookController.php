@@ -236,6 +236,7 @@ class BookController extends Controller
                                 $lastname = utf8_encode(addslashes($author['lastname']));
                                 $dates = utf8_encode(addslashes($author['dates']));
 
+
                                 //on vérifie si l'auteur existe déjà dans Prévu
                                 $sql_check = "SELECT COUNT(*) as nb FROM author WHERE firstname = :firstname AND lastname = :lastname AND dates = :dates ";
                                 $stmt = $connPrevu->prepare($sql_check);
@@ -249,7 +250,7 @@ class BookController extends Controller
                                 //Si l'auteur n'existe pas déjà, on insère ses infos
                                 if ($checkAuthor < 1) {
 
-                                    $sql = "INSERT INTO author (firstname, lastname, dates, NOW(), NOW()) VALUES(:firstname, :lastname, :dates, date_creation, last_update)";
+                                    $sql = "INSERT INTO author (firstname, lastname, dates) VALUES(:firstname, :lastname, :dates)";
                                     $stmt = $connPrevu->prepare($sql);
                                     $stmt->bindValue('firstname', $firstname);
                                     $stmt->bindValue("lastname", $lastname);
@@ -292,6 +293,24 @@ class BookController extends Controller
                     //Ajout de la clé de la notice
                     //-----------------------------------------------------------
 
+                    //si la notice existait déjà
+                    else{
+
+                        //Il faut récupérer son id
+                        $sql = "SELECT id_book as id FROM book as b INNER JOIN `key` as k ON k.prevu = b.id_book WHERE title = :title AND isbn = :isbn AND library != :library AND k.type = 'book' ";
+                        $stmt = $connPrevu->prepare($sql);
+                        $stmt->bindValue("title", $title);
+                        $stmt->bindValue("isbn", $isbn);
+                        $stmt->bindValue("library", $library);
+                        $stmt->execute();
+                        $id_prevu = $stmt->fetch();
+                        $id_prevu = $id_prevu['id'];
+
+                        //il faut récupérer son auteur
+                    }
+
+//                    dump($exist);die();
+
                     $sql = "INSERT INTO prevu.key(prevu, koha, type, library, date_creation, last_update) VALUES( :id_prevu, :id_koha,:type, :library , NOW(), NOW() );";
 
 
@@ -304,15 +323,17 @@ class BookController extends Controller
 
                     $cmp = $i;
 
-                    //-----------------------------------------------------------
-                    //Ajout du mains auteur : relation book / author dans book
-                    //-----------------------------------------------------------
-                    $sql = "UPDATE book SET id_author = :author WHERE id_book = :book";
-                    $stmt = $connPrevu->prepare($sql);
-                    $stmt->bindValue("author", $id_author);
-                    $stmt->bindValue("book", $id_prevu);
-                    $stmt->execute();
-
+                    //si la notice n'existait pas déjà, on ajoute l'auteur
+                    if($exist > 0){
+                        //-----------------------------------------------------------
+                        //Ajout du mains auteur : relation book / author dans book
+                        //-----------------------------------------------------------
+                        $sql = "UPDATE book SET id_author = :author WHERE id_book = :book";
+                        $stmt = $connPrevu->prepare($sql);
+                        $stmt->bindValue("author", $id_author);
+                        $stmt->bindValue("book", $id_prevu);
+                        $stmt->execute();
+                    }
 
                     //-----------------------------------------------------------
                     //Ajout des auteurs secondaires : relation book / author many to many dans table intermédiaire - TODO
