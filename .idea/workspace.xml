@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e14c6e74-4351-472b-9071-3e2206d10c5f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Issue.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Issue.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/security.yml" afterPath="$PROJECT_DIR$/app/config/security.yml" />
     </list>
     <ignored path="prevu-dev.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -145,10 +146,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Issue.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Issue.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Issue.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-300">
+            <state relative-caret-position="435">
               <caret line="92" column="6" selection-start-line="92" selection-start-column="6" selection-end-line="92" selection-end-column="6" />
               <folding />
             </state>
@@ -190,11 +191,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="security.yml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="security.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/config/security.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="40" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
+            <state relative-caret-position="300">
+              <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -264,11 +265,11 @@
         <option value="$PROJECT_DIR$/src/EcranBundle/Resources/views/Article/pret.html.twig" />
         <option value="$PROJECT_DIR$/src/EcranBundle/Controller/EcranController.php" />
         <option value="$PROJECT_DIR$/src/ImportBundle/Controller/BookController.php" />
-        <option value="$PROJECT_DIR$/app/config/security.yml" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/libraryController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/Library/index.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/Web/LibraryController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Issue.php" />
+        <option value="$PROJECT_DIR$/app/config/security.yml" />
       </list>
     </option>
   </component>
@@ -854,12 +855,12 @@
       <workItem from="1487235309237" duration="643000" />
       <workItem from="1487250371771" duration="1013000" />
       <workItem from="1487349537847" duration="846000" />
-      <workItem from="1487610323702" duration="5060000" />
+      <workItem from="1487610323702" duration="5598000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="251785000" />
+    <option name="totallyTimeSpent" value="252323000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
@@ -1336,18 +1337,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/security.yml">
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Issue.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="40" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
+        <state relative-caret-position="435">
+          <caret line="92" column="6" selection-start-line="92" selection-start-column="6" selection-end-line="92" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Issue.php">
+    <entry file="file://$PROJECT_DIR$/app/config/security.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-300">
-          <caret line="92" column="6" selection-start-line="92" selection-start-column="6" selection-end-line="92" selection-end-column="6" />
+        <state relative-caret-position="300">
+          <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
           <folding />
         </state>
       </provider>

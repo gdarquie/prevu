@@ -28,8 +28,8 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: ROLE_USER }
         - { path: ^/resetting, role: ROLE_USER }
-        - { path: ^/biblio, role: ROLE_USER } #changer plus tard par rôle biblio
+        - { path: ^/biblio, role: ROLE_BIBLIO } #changer plus tard par rôle biblio
         - { path: ^/ecran , role: ROLE_ADMIN }
-        - { path: ^/ , role: ROLE_ADMIN }
+        - { path: ^/ , role: ROLE_USER }
         - { path: ^/import, role: ROLE_ADMIN }
         - { path: ^/admin, role: ROLE_ADMIN }
