@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <section class="container">
+
+        <h1 class="center">Editer un item</h1>
+
+        {{ form_start(thesaurusForm)}}
+        {{ include('AdminBundle:Thesaurus:_form.html.twig')}}
+        <button class="btn black right" type="submit" formnovalidate >Editer</button>
+        {{ form_end(thesaurusForm)}}
+
+        {{ form_start(delete_form) }}
+        <button value="Supprimer" class="btn black right ">Supprimer</button>
+        {{ form_end(delete_form) }}
+
+    </section>
+
+{% endblock %}

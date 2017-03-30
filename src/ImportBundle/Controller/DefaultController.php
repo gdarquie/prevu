@@ -52,10 +52,10 @@ class DefaultController extends Controller
 
         //Calcul du nombre de livres
 
-        $sql_total = "SELECT COUNT(*)as nb FROM book INNER JOIN `key` ON book.id_book = key.prevu WHERE library = 1";
+        $sql_total = "SELECT COUNT(*)as nb FROM book INNER JOIN association ON book.id_book = association.prevu WHERE library = 1";
         $totalBooksUp8 = $connPrevu->fetchAssoc($sql_total); //nb total de livres dans book de Prévu pour cette biblio
 
-        $sql_total = "SELECT COUNT(*)as nb FROM book INNER JOIN `key` ON book.id_book = key.prevu WHERE library = 2";
+        $sql_total = "SELECT COUNT(*)as nb FROM book INNER JOIN association ON book.id_book = association.prevu WHERE library = 2";
         $totalBooksRbx = $connPrevu->fetchAssoc($sql_total); //nb total de livres dans book de Prévu pour cette biblio
 
         $sql_total = "SELECT COUNT(*)as nb FROM book";

@@ -24,6 +24,7 @@
 
     </head>
 
+    <body>
     <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
@@ -39,11 +40,12 @@
         <div>
             <div class="container">
             {% block content %}
-                {% block fos_user_content %}{% endblock %}
+                {% block fos_user_content %}
+                {% endblock %}
             {% endblock %}
             </div>
-            
-            {% block body %}{% endblock %}
+
+            {#{% block body %}{% endblock %}#}
             {% block javascripts %}{% endblock %}
         </div>
     </body>

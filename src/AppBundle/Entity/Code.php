@@ -12,12 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Code
 {
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="code", type="string", length=45, nullable=true)
-     */
-    private $code;
+
 
     /**
      * @var integer
@@ -27,6 +22,13 @@ class Code
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code", type="string", length=45, nullable=true)
+     */
+    private $code;
 
     /**
      * @ORM\Column(type="datetime")

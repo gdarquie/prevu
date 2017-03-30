@@ -9,9 +9,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class StatsController extends Controller
 {
-    /**
-     * @Route("/api/isbn", name="api_isbn")
-     */
+//    /**
+//     * @Route("/api/isbn", name="api_isbn")
+//     */
     public function isbnAction(){
 
         $em = $this->getDoctrine()->getManager();
@@ -25,9 +25,9 @@ class StatsController extends Controller
     }
 
     //liste des livres empruntés par année
-    /**
-     * @Route("/api/borrowed/", name="api_borrowedByYear")
-     */
+//    /**
+//     * @Route("/api/borrowed/", name="api_borrowedByYear")
+//     */
     public function borrowedByYearAction(){
 
         $em = $this->getDoctrine()->getManager();

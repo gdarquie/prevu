@@ -1,0 +1,114 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+
+    {{ parent() }}
+    <style>
+        .link{font-size: 0.4em;vertical-align: middle;}
+        h2 {
+            color : #ffb300 !important;
+        }
+        .nlien{
+            cursor: pointer;
+        }
+    </style>
+
+{% endblock %}
+
+{% block body %}
+
+    <section class="container row">
+
+        <h1>Editeur - Penser la notion d'écran</h1>
+
+        <div class="card">
+
+            <h2><span>Les {{ books|length }} notices qui contiennent écran</span></h2>
+
+            <table class="mini-table responsive-table highlight tablesorter" id="notices">
+                <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Auteur(s)</th>
+                    <th>Année de publication</th>
+                    <th>Singulier/Pluriel?</th>
+                    <th>Discipline</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                {% for item in books  %}
+                    <tr>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.customAuthor }}</td>
+                        <td>{{ item.customPublication }}</td>
+                        <td>{{ item.customNombre }}</td>
+                        <td>{{ item.customDiscipline }}</td>
+                        <td><a href="{{ path('edit_book', {'bookId' : item.id}) }}">Modifier</a></td>
+                    </tr>
+                {% endfor %}
+                <tbdoy>
+            </table>
+
+            <p class="nlien center showall">Voir toutes les notices</p>
+
+        </div>
+
+        <div class="card">
+
+            <h2><span>Gestion des thésaurus</span><span class="link"> - <a href="{{ path('ecran_editor_add') }}">Ajouter un élément de thésaurus</a></span></h2>
+
+            <table class="striped mini-table tablesorter responsive-table highlight">
+
+                <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Type</th>
+                    <th>Modifier</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for item in thesaurus  %}
+                    <tr>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.type }}</td>
+                        <td><a href="{{ path('edit_thesaurus', {'id' : item.id}) }}">Modifier</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Stats</h2>
+
+            <ul class="browser-default">
+                <li><a href="">singulier/pluriel</a> (du thésaurus)</li>
+                <li>disciplines (du thésaurus)</li>
+                <li>dates de publication</li>
+            </ul>
+        </div>
+
+    </section>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+
+
+        $('.nlien').click(function(){
+            displayTables(true);
+        })
+
+        $(document).ready(function()
+            {
+                displayTables(false);
+            }
+        );
+
+    </script>
+{% endblock %}

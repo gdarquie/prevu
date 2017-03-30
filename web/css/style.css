@@ -1,5 +1,12 @@
 body{
     background: whitesmoke;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
 }
 
 #logo{
@@ -36,4 +43,26 @@ body{
 
 .oeuvre{
     font-size: 2em;
+}
+
+.card{
+    padding: 10px;
+}
+
+.page-footer{
+    background: #ffb300 !important
+}
+
+.mini-table td, .mini-table th{
+    font-size:0.8em;
+    line-height: 1em;
+    padding: 2px 5px;
+
+}
+
+.middle-table td, .middle-table th{
+    font-size:0.9em;
+    line-height: 1.2em;
+    padding: 3px 5px;
+
 }

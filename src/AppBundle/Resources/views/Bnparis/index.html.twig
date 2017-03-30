@@ -1,0 +1,585 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <section class="container">
+        <h1>Bibliothèque numérique de Paris</h1>
+
+        <article class="card">
+
+            <h2>Statistiques générales</h2>
+
+            <p>Nombre de logs : <span class="number">{{ total.nb }}</span></p>
+
+        </article>
+
+        <!-- top notices -->
+        <article class="card">
+            <h2>Les livres les plus empruntés</h2> <!-- créer une fiche livre et rendre possible le zoom sur un livre -->
+
+            <table class="striped tablesorter">
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Auteur</th>
+                        <th>EAN</th>
+                        <th>Nombre d'emprunts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in top_books  %}
+                    <tr>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.author }}</td>
+                        <td>{{ item.ean }}</td>
+                        <td>{{ item.nb }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </article>
+
+        <!-- top auteurs -->
+
+        <article class="card">
+            <h2>Les auteurs les plus empruntés</h2> <!-- créer une fiche livre et rendre possible le zoom sur un livre -->
+
+            <table class="striped tablesorter">
+                <thead>
+                <tr>
+                    <th>Auteur</th>
+                    <th>Nombre d'emprunts</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in top_authors  %}
+                    <tr>
+                        <td>{{ item.author }}</td>
+                        <td>{{ item.nb }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </article>
+
+        <!-- genre -->
+        <article class="card row">
+
+            <h2>Genre</h2>
+
+            <div class="col s6" id="genre">
+                <svg style="height:400px;"></svg>
+            </div>
+
+            <div class="col s6">
+                <table class="striped">
+                    <tr>
+                        <th>Genre</th>
+                        <th>Nombre d'occurences</th>
+                    </tr>
+                {% for item in genres  %}
+                    {% if item.title != "0" %}
+                    <tr>
+                        <td><a href="{{ path('paris_bn_genre', {'genre' : item.title}) }}">{{ item.title }}</a></td>
+                        <td>{{ item.nb }}</td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+                </table>
+            </div>
+        </article>
+
+        <!-- csp -->
+        <article class="card row">
+
+            <h2>Catégories sociaux professionnelles</h2>
+
+            <div class="col s8" id="csp">
+                <svg style="height:600px;"></svg>
+            </div>
+
+            <div class="col s4">
+                <table class="striped">
+                    <tr>
+                        <th>CSP</th>
+                        <th>Nombre d'occurences</th>
+                    </tr>
+                    {% for item in csp  %}
+                        {% if item.title != "0" %}
+                            <tr>
+                                <td>{{ item.title }}</td>
+                                <td>{{ item.nb }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+        </article>
+
+        <!-- jours -->
+        <article class="card row">
+            <h2>Répartition par jour</h2>
+
+            <div class="col s6" id="jour">
+                <svg style="height:500px;"></svg>
+            </div>
+
+            <table class="striped col s6">
+                <tr>
+                    <th>Jour</th>
+                    <th>Nombre d'occurences</th>
+                </tr>
+                {% for item in days  %}
+                    {% if item.title != "0" %}
+                        <tr>
+                            <td>{{ item.title }}</td>
+                            <td>{{ item.nb }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+
+        </article>
+
+        <article class="card row">
+
+            <h2>Répartition par heure</h2>
+
+            <div id="chart"></div>
+            <div id="dataset-picker">
+            </div>
+
+            <p>Les emprunts les plus importants ont lieu entre 21h et 23h, surtout le lundi, mercredi, jeudi et dimanche. Les pics d'emprunts ont également lieu le dimanche après midi de 14 à 16h et de 17 à 20h. Le pic d'emprunt le plus important à lieu le lundi soir avec 174 emprunts.</p>
+
+            <div class="col s6" id="heure">
+                <svg style="height:500px;"></svg>
+            </div>
+
+            <table class="striped col s6">
+                <tr>
+                    <th>Heure</th>
+                    <th>Nombre d'occurences</th>
+                </tr>
+                {% for item in hours  %}
+
+                    <tr>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.nb }}</td>
+                    </tr>
+
+                {% endfor %}
+            </table>
+
+        </article>
+
+        <article class="card">
+            <h2>Age des utilisateurs</h2>
+
+            <table class="striped">
+                <tr>
+                    <th>Age</th>
+                    <th>Nombre d'occurences</th>
+                </tr>
+                {% for item in birthdays  %}
+                    {% if item.title != "0" %}
+                        <tr>
+                            <td>{{ item.title|date() }}</td>
+                            <td>{{ item.nb }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+
+        </article>
+
+        <article class="card">
+            <h2>Adresse des utilisateurs</h2>
+
+            <table class="striped">
+                <tr>
+                    <th>Adresse</th>
+                    <th>Nombre d'occurences</th>
+                </tr>
+                {% for item in adresses  %}
+                    {% if item.title != "0" %}
+                        <tr>
+                            <td>{{ item.title }}</td>
+                            <td>{{ item.nb }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </article>
+
+        <article class="card">
+            <h2>Types d'abonnements</h2>
+
+            <table class="striped">
+                <tr>
+                    <th>Abonnements</th>
+                    <th>Nombre d'occurences</th>
+                </tr>
+                {% for item in abonnements  %}
+                    <tr>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.nb }}</td>
+                    </tr>
+
+                {% endfor %}
+            </table>
+        </article>
+
+        <article class="card">
+            <h2>Les utilisateurs</h2>
+
+            <p>Nombre d'utilisateurs : <span class="number">{{ total_cb.nb }}</span></p>
+
+            <table class="striped">
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Nombre d'occurences</th>
+                </tr>
+                {% for item in top_users  %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ item.nb }}</td>
+                    </tr>
+
+                {% endfor %}
+            </table>
+
+        </article>
+
+
+        <article class="card">
+            <h2>Exemple</h2>
+
+            <p>Possibilité de suivre les catégories d'user à partir du genre, puis de voir par genre, les csps, les heures de consultation, les adresses, etc. Puis de voir pour un genre et un csp donné les mêmes infos. En allant jusqu'à 3 critères : (par exemple, un csp, un genre un lieu et voir à quelle heure on emprunte le plus dans ce cas ou quel est l'âge moyen, etc.)</p>
+
+
+            <h2>Méthode pour continuer</h2>
+
+            <p>Développer un explorateur multicritère et essayer de creuser d'avantage ce qu'on peut dire à partir des données? Mais il faudrait les notices et si possible des infos de type discipline des notices (savoir à quelle heure on consulte certaines disciplines ou types d'ouvrages ou quel tranche d'âge et csp le font?)</p>
+
+        </article>
+
+        <article class="card">
+            <h2>Questions / Travail à mener</h2>
+            
+            <ul>
+                <li>1. Questions essentielles : peut-on récupérer les noms des notices consultées et comment? (et que sont exactement les logs récupérés) Oui</li>
+                <li>2. Est-il possible de récupérer autrement le format des dates (via le datetime brut?)  Oui</li>
+                <li>3. Que veut-on raconter avec ces données? Quels scénarios?</li>
+                <li>4. Quels sont les dates pour fournir les rendus s'il est possible d'écrire des scénarios intéressants? </li>
+            </ul>
+
+            <h3>Questions sur les données</h3>
+            <ul>
+                <li>Que sont les cbs?</li>
+                <li>peut-on avoir cb, abonnement, etc. + la localisation dans une même tableau?</li>
+                <li>que sont les données "SommeDeSommeDeemprunts" : somme des emprunts numériques, "liseuses", les emprunts de liseuses et "comptes", les emprunts physique?</li>
+            </ul>
+            
+            <h3>3. Scénarios</h3>
+            
+            <ul>
+                <li>Mieux connaitre les user : voir qui consulte, par genre ou par csp ou par age et croiser les données pour savoir à quelle heure, quel jour, etc. </li>
+                <li>Connaitres les notices : quelles sont les notices les plus consultées, à quelle heure, par qui (csp, âge), quel jour.</li>
+            </ul>
+
+            <h2>Réponses</h2>
+
+            <p>On peut savoir quelles sont les notices consultées. Comment se concentre l'offre en bibliothèque numérique? est-ce qu'il y a un rétrécissement?</p>
+
+            <p>Les prêts numériques durent 4 semaines avec DRM, à l'identique du livre papier mais dans l'espace numérique.</p>
+            <ul>
+                <li>Les livres sont limités dans l'emprunt</li>
+                <li>Chronodégradabilité</li>
+            </ul>
+
+            <p>Des mots clés pour les thématiques / mais pas exploitables</p>
+
+            <p>Données éditeur sont correctes, année de publication (mais pas beaucoup d'intérêt car mis à jour avec date de publicaiton numérique)</p>
+
+            <p>Sélection : des catégories faites par les bibliothécaires, voir la consultation et les sélections</p>
+
+            <p>Les nouveautés : une facette</p>
+        </article>
+
+
+
+    </section>
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <!-- Materialize -->
+
+    <script type="text/javascript" src="{{ asset('assets/vendor/materialize/js/parallax.js') }}"></script>
+
+
+    <!-- D3.JS -->
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ asset('assets/vendor/nvd3/build/nv.d3.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('/assets/vendor/nvd3/build/nv.d3.css')}}">
+    <!-- END D3.JS -->
+
+    <script>
+
+
+        //--- Genres
+
+        nv.addGraph(function() {
+            var chart = nv.models.pieChart()
+                    .x(function(d) { return d.label })
+                    .y(function(d) { return d.value })
+                    .showLabels(true)     //Display pie labels
+                    .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                    .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                    .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                    .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                ;
+            d3.select("#genre svg")
+                .datum(genreData())
+                .transition().duration(350)
+                .call(chart);
+
+            return chart;
+        });
+
+        //Pie chart example data. Note how there is only a single array of key-value pairs.
+        function genreData() {
+            return  [
+                {% for item in genres %}
+                    {% if item.title != "0" %}
+                    {"label" : "{{item.title}}",
+                        "value" : "{{item.nb}}"},
+                    {% endif %}
+                {% endfor %}
+
+            ];
+        }
+
+        //--- CSP
+
+        nv.addGraph(function() {
+            var chart = nv.models.pieChart()
+                    .x(function(d) { return d.label })
+                    .y(function(d) { return d.value })
+                    .showLabels(true)     //Display pie labels
+                    .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                    .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                    .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                    .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                ;
+            d3.select("#csp svg")
+                .datum(cspData())
+                .transition().duration(350)
+                .call(chart);
+
+            return chart;
+        });
+
+        //Pie chart example data. Note how there is only a single array of key-value pairs.
+        function cspData() {
+            return  [
+                {% for item in csp %}
+                {% if item.title != "0" %}
+                {"label" : "{{item.title}}",
+                    "value" : "{{item.nb}}"},
+                {% endif %}
+                {% endfor %}
+
+            ];
+        }
+
+        //--- Jour
+
+        nv.addGraph(function() {
+            var chart = nv.models.pieChart()
+                    .x(function(d) { return d.label })
+                    .y(function(d) { return d.value })
+                    .showLabels(true)     //Display pie labels
+                    .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                    .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                    .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                    .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                ;
+            d3.select("#jour svg")
+                .datum(jourData())
+                .transition().duration(350)
+                .call(chart);
+
+            return chart;
+        });
+
+        //Pie chart example data. Note how there is only a single array of key-value pairs.
+        function jourData() {
+            return  [
+                {% for item in days %}
+                {% if item.title != "0" %}
+                {"label" : "{{item.title}}",
+                    "value" : "{{item.nb}}"},
+                {% endif %}
+                {% endfor %}
+
+            ];
+        }
+
+        //--- Heures
+
+        nv.addGraph(function() {
+            var chart = nv.models.pieChart()
+                    .x(function(d) { return d.label })
+                    .y(function(d) { return d.value })
+                    .showLabels(true)     //Display pie labels
+                    .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                    .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                    .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                    .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                ;
+            d3.select("#heure svg")
+                .datum(heureData())
+                .transition().duration(350)
+                .call(chart);
+
+            return chart;
+        });
+
+        //Pie chart example data. Note how there is only a single array of key-value pairs.
+        function heureData() {
+            return  [
+                {% for item in hours %}
+
+                {"label" : "{{item.title}}",
+                    "value" : "{{item.nb}}"},
+
+                {% endfor %}
+
+            ];
+        }
+    </script>
+
+    <script type="text/javascript">
+        var margin = { top: 50, right: 0, bottom: 100, left: 30 },
+            width = 960 - margin.left - margin.right,
+            height = 430 - margin.top - margin.bottom,
+            gridSize = Math.floor(width / 24),
+            legendElementWidth = gridSize*2,
+            buckets = 9,
+            colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"], // alternatively colorbrewer.YlGnBu[9]
+            days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+            times = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
+        {#datasets = ["{{ path('api_bn_hours_csv') }}", "{{ asset('data/data2.csv') }}"];#}
+        datasets = ["{{ asset('data/data.csv') }}", "{{ asset('data/data2.csv') }}"]
+        //data.csv est constitué à partir des données de Prévu
+
+        var svg = d3.select("#chart").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var dayLabels = svg.selectAll(".dayLabel")
+            .data(days)
+            .enter().append("text")
+            .text(function (d) { return d; })
+            .attr("x", 0)
+            .attr("y", function (d, i) { return i * gridSize; })
+            .style("text-anchor", "end")
+            .attr("transform", "translate(-6," + gridSize / 1.5 + ")")
+            .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
+
+        var timeLabels = svg.selectAll(".timeLabel")
+            .data(times)
+            .enter().append("text")
+            .text(function(d) { return d; })
+            .attr("x", function(d, i) { return i * gridSize; })
+            .attr("y", 0)
+            .style("text-anchor", "middle")
+            .attr("transform", "translate(" + gridSize / 2 + ", -6)")
+            .attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
+
+        var heatmapChart = function(tsvFile) {
+            d3.csv(tsvFile,
+                function(d) {
+                    return {
+                        day: +d.day,
+                        hour: +d.hour,
+                        value: +d.value
+                    };
+                },
+                function(error, data) {
+                    var colorScale = d3.scale.quantile()
+                        .domain([0, buckets - 1, d3.max(data, function (d) { return d.value; })])
+                        .range(colors);
+
+                    var cards = svg.selectAll(".hour")
+                        .data(data, function(d) {return d.day+':'+d.hour;});
+
+                    cards.append("title");
+
+                    cards.enter().append("rect")
+                        .attr("x", function(d) { return (d.hour - 1) * gridSize; })
+                        .attr("y", function(d) { return (d.day - 1) * gridSize; })
+                        .attr("rx", 4)
+                        .attr("ry", 4)
+                        .attr("class", "hour bordered")
+                        .attr("width", gridSize)
+                        .attr("height", gridSize)
+                        .style("fill", colors[0]);
+
+                    cards.transition().duration(1000)
+                        .style("fill", function(d) { return colorScale(d.value); });
+
+                    cards.select("title").text(function(d) { return d.value; });
+
+                    cards.exit().remove();
+
+                    var legend = svg.selectAll(".legend")
+                        .data([0].concat(colorScale.quantiles()), function(d) { return d; });
+
+                    legend.enter().append("g")
+                        .attr("class", "legend");
+
+                    legend.append("rect")
+                        .attr("x", function(d, i) { return legendElementWidth * i; })
+                        .attr("y", height)
+                        .attr("width", legendElementWidth)
+                        .attr("height", gridSize / 2)
+                        .style("fill", function(d, i) { return colors[i]; });
+
+                    legend.append("text")
+                        .attr("class", "mono")
+                        .text(function(d) { return "≥ " + Math.round(d); })
+                        .attr("x", function(d, i) { return legendElementWidth * i; })
+                        .attr("y", height + gridSize);
+
+                    legend.exit().remove();
+
+                });
+        };
+
+        heatmapChart(datasets[0]);
+
+        var datasetpicker = d3.select("#dataset-picker").selectAll(".dataset-button")
+            .data(datasets);
+
+        datasetpicker.enter()
+            .append("input")
+            .attr("value", function(d){ return "Dataset " })
+            .attr("type", "button")
+            .attr("class", "dataset-button")
+            .on("click", function(d) {
+                heatmapChart(d);
+            });
+    </script>
+
+
+{% endblock %}

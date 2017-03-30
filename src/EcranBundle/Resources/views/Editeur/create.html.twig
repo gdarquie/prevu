@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <section class="container">
+
+        <section>
+
+            <h1>Ajouter un nouvel élement de thésaurus</h1>
+
+            {{ form_start(form)}}
+
+            {{ include('EcranBundle:Editeur:_form.html.twig')}}
+
+            <button class="btn black" type="submit" formnovalidate>Créer</button>
+
+            {{ form_end(form)}}
+
+        </section>
+
+    </section>
+{% endblock %}

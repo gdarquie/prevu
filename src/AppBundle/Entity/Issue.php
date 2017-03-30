@@ -353,29 +353,20 @@ class Issue
         $this->idborrower = $idborrower;
     }
 
-
     /**
-     * Set idbook
-     *
-     * @param \AppBundle\Entity\Books $idbook
-     *
-     * @return PrIssues
-     */
-    public function setIdbook(\AppBundle\Entity\Books $idbook = null)
-    {
-        $this->idbook = $idbook;
-
-        return $this;
-    }
-
-    /**
-     * Get idbook
-     *
-     * @return \AppBundle\Entity\Books
+     * @return Book
      */
     public function getIdbook()
     {
         return $this->idbook;
+    }
+
+    /**
+     * @param Book $idbook
+     */
+    public function setIdbook($idbook)
+    {
+        $this->idbook = $idbook;
     }
 
     /**

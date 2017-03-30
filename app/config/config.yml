@@ -1,3 +1,6 @@
+graph_ql:
+    schema_class: "ApiBundle\\GraphQL\\Schema"
+
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
@@ -5,11 +8,14 @@ imports:
     - { resource: "@EcranBundle/Resources/config/services.yml" }
     - { resource: "@AdminBundle/Resources/config/services.yml" }
     - { resource: "@ImportBundle/Resources/config/services.yml" }
+    - { resource: "@ApiBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    graphql:
+      schema_class: ApiBundle\GraphQL\Schema
 
 # app/config/config.yml
 
@@ -42,6 +48,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
+
 # Doctrine Configuration
 #doctrine:
 #    dbal:
@@ -60,18 +67,19 @@ twig:
 #        #     path:     "%database_path%"
 
 
-doctrine:
-    dbal:
-        default_connection: default
-        connections:
-            default:
-                driver:   pdo_mysql
-                host:     '%database_host%'
-                port:     '%database_port%'
-                dbname:   '%database_name%'
-                user:     '%database_user%'
-                password: '%database_password%'
-                charset:  UTF8
+#pour l'import
+#doctrine:
+#    dbal:
+#        default_connection: default
+#        connections:
+#            default:
+#                driver:   pdo_mysql
+#                host:     '%database_host%'
+#                port:     '%database_port%'
+#                dbname:   '%database_name%'
+#                user:     '%database_user%'
+#                password: '%database_password%'
+#                charset:  UTF8
 #            koha:
 #                driver:   pdo_mysql
 #                host:     '%database_host2%'
@@ -81,21 +89,27 @@ doctrine:
 #                password: '%database_password2%'
 #                charset:  UTF8
 
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #     path:     "%database_path%"
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
-#    orm:
-#      default_entity_manager: default
-#      entity_managers:
-#          default:
-#              connection: default
-#              mappings:
-#                  AppBundle:  ~
-#          koha:
-#              connection: koha
-#              mappings:
-#                  ImportBundle: ~
         dql:
           datetime_functions:
              convert_tz: DoctrineExtensions\Query\Mysql\ConvertTz
@@ -205,3 +219,32 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
     user_class: AppBundle\Entity\User
+    from_email:
+        address: gaetan.darquie@gmail.com
+        sender_name: You
+
+# Fos Elastica
+fos_elastica:
+    clients:
+        default: { host: localhost, port: 9200 }
+    indexes:
+        app:
+            finder: ~
+            index_name: prevu
+            types:
+                book:
+                    properties:
+                        title: ~
+                        author: ~
+                    persistence:
+                        # the driver can be orm, mongodb, phpcr or propel
+                        # listener and finder are not supported by
+                        # propel and should be removed
+                        driver: orm
+                        model: AppBundle\Entity\Code
+                        provider: ~
+                        finder: ~
+
+#imports:
+#    - { resource: fos_elastica.yml }
+

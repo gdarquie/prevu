@@ -15,17 +15,29 @@ class EcranController extends Controller
     public function indexAction()
     {
 
+        $library = 1;
+
         $em = $this->getDoctrine()->getManager();
 
-        $query = $em->createQuery("SELECT COUNT(DISTINCT(b.idBook) as nb FROM AppBundle:Book b");
+        $query = $em->createQuery("SELECT COUNT(DISTINCT(b.id) as nb FROM AppBundle:Book b JOIN b.keys k WHERE k.library = 1");
         //additionner les renewals
         $nbNotices = $query->getSingleResult();
 
-        $query = $em->createQuery("SELECT COUNT(b.title) as nb FROM AppBundle:Book b WHERE b.issues > 0");
+        $query = $em->createQuery("SELECT COUNT(b.title) as nb FROM AppBundle:Book b JOIN b.keys k WHERE b.issues > 0 AND k.library = 1");
         //additionner les renewals
         $nbNoticesEmpruntees = $query->getSingleResult();
 
-        $query = $em->createQuery("SELECT MAX(i.returndate) as last, MIN(i.issuedate) as first FROM AppBundle:Issue i");
+        //--------------------
+        //-------------------- ne marche pas ----
+        //--------------------
+        //nombre d'emprunts totaux par mois (il faut grouper par mois)
+        $query = $em->createQuery("SELECT COUNT(i.idIssue) as nb FROM AppBundle:Issue i GROUP BY i.returndate")->setMaxResults(100);
+        $nbNoticesEmprunteesMois = $query->getResult();
+        //--------------------
+        //--------------------
+        //--------------------
+
+        $query = $em->createQuery("SELECT MAX(i.returndate) as last, MIN(i.returndate) as first FROM AppBundle:Issue i  WHERE i.idlibrary = 1");
         //additionner les renewals
         $dateBorrow = $query->getSingleResult();
 
@@ -42,21 +54,23 @@ class EcranController extends Controller
         $string = "écran";
 
         //nb de documents comportant le mot écran dans le titre
-        $query = $em->createQuery("SELECT COUNT(DISTINCT(b.idBook)) as nb FROM AppBundle:Book b WHERE b.title LIKE :string");
+        $query = $em->createQuery("SELECT COUNT(DISTINCT(b.id)) as nb FROM AppBundle:Book b JOIN b.keys k WHERE k.library = :library AND b.title LIKE :string");
+        $query->setParameter('library', $library);
         $query->setParameter('string', '%'.$string.'%');
         $nbDocumentsEcran = $query->getSingleResult();
 
-        $query = $em->createQuery("SELECT b.title as title, b.author as authors, b.publicationyear as released FROM AppBundle:Book b WHERE b.title LIKE :string");
+        $query = $em->createQuery("SELECT a.firstname as firstname, a.lastname as lastname, a.dates as dates, b.title as title, b.author as authors, b.publicationyear as released FROM AppBundle:Book b  JOIN b.keys k JOIN b.first_author a WHERE k.library = :library AND b.title LIKE :string ORDER BY b.publicationyear");
         $query->setParameter('string', '%'.$string.'%');
+        $query->setParameter('library', $library);
         $docEcrans = $query->getResult();
 
         //nb de documents par années
-        $query = $em->createQuery("SELECT b.publicationyear as publicationyear, COUNT(b.idBook) as nb FROM AppBundle:Book b WHERE b.publicationyear > 0 AND b.publicationyear < 2017 AND  b.title LIKE :string GROUP BY b.publicationyear ");
+        $query = $em->createQuery("SELECT b.publicationyear as publicationyear, COUNT(b.id) as nb FROM AppBundle:Book b WHERE b.publicationyear > 0 AND b.publicationyear < 2017 AND  b.title LIKE :string GROUP BY b.publicationyear ");
         $query->setParameter('string', '%'.$string.'%');
         $docByYear = $query->getResult();
 
         //nb de documents par décennie
-        $query = $em->createQuery("SELECT FLOOR(b.publicationyear/10)*10 as decade, COUNT(b.idBook) as nb FROM AppBundle:Book b WHERE b.publicationyear > 0 AND b.publicationyear < 2017 AND  b.title LIKE :string GROUP BY decade ");
+        $query = $em->createQuery("SELECT FLOOR(b.publicationyear/10)*10 as decade, COUNT(b.id) as nb FROM AppBundle:Book b WHERE b.publicationyear > 0 AND b.publicationyear < 2017 AND  b.title LIKE :string GROUP BY decade ");
         $query->setParameter('string', '%'.$string.'%');
         $docByDecade = $query->getResult();
 

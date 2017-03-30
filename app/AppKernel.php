@@ -21,6 +21,9 @@ class AppKernel extends Kernel
             new EcranBundle\EcranBundle(),
             new AdminBundle\AdminBundle(),
             new ImportBundle\ImportBundle(),
+            new ApiBundle\ApiBundle(),
+            new Youshido\GraphQLBundle\GraphQLBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

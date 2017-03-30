@@ -41,12 +41,12 @@
             <h1>La notion d'écran</h1>
 
             <section class="chapter">
-                <h2>Contexte de la recherche</h2>
+                <h2>I) Contexte de la recherche [Gaétan]</h2>
                 <article class="card">
-                    <h3>Objet de l'article</h3>
+                    <h3>1) Objet de l'article</h3>
 
                     <article class="souspartie">
-                    <h4>Le projet</h4>
+                    <h4>A) Le projet</h4>
 
                     <p>Porté par Gaétan Darquié, le projet Prévu est soutenu et financé par le Labex Arts-H2H. Débuté en janvier 2014 le projet s'est achevé le 31 décembre 2016.</p>
 
@@ -63,7 +63,7 @@
                     </article>
 
                     <article class="souspartie">
-                        <h4>Le Service Commun de la Documentation de Paris 8</h4>
+                        <h4>B) Le Service Commun de la Documentation de Paris 8</h4>
 
                         <p>Le projet Prévu se concentre sur les données de prêts du Service Commun de la Documentation (SCD) de Paris 8.</p>
 
@@ -74,19 +74,17 @@
 
                     <article class="souspartie">
 
-                        <h4>La place dans le projet</h4>
+                        <h4>C) La place dans le projet</h4>
 
                         <p>La première phase du projet a permis d'interroger le potentiel de l'outil à partir de scénarios orientés autour des profils de trois types d''utilisateurs : les chercheurs, les bibliothécaires et d'une manière plus large : les usagers de la bibliothèque. Dans le cadre de cet article, nous nous concentrons sur l'utilisation par les chercheurs de l'outil Prévu.</p>
 
                         <p></p>
                     </article>
 
-
-
                 </article>
 
                 <article class="card">
-                    <h3>Méthodologie</h3>
+                    <h3>2) Méthodologie</h3>
                     <p> Un outil destiné à plusieurs publics (chercheurs, étudiants et bibliothécaires). Dans cet article nous nous concentrons sur des scénarios pour les chercheurs.</p>
                     <p>Travailler avec des données en SHS et surtout, construire des outils qui permettent de travailler en DH.
                         Les enjeux de l’article:
@@ -108,10 +106,10 @@
 
             <h1>[travail en cours]</h1>
             <section>
-                <h2>Etudier la notion d'écran</h2>
+                <h2>II) Etudier la notion d'écran [Cécile]</h2>
 
                 <article class="card">
-                    <h3>Origine de la recherche</h3>
+                    <h3>1) Origine de la recherche</h3>
 
                     <p>Au cours de nos recherches visant à élaborer une taxinomie raisonnée de l’ensemble des artefacts rassemblés sous le terme écrans (REf articles, conf et thèse), nous avons notamment travaillé sur l’émergence du terme écran dans la culture occidentale.</p>
 
@@ -119,7 +117,7 @@
 
                     <p>[rappeler rapidement en quoi le terme écran est 2/ polysémique et en quoi il y a 1/ un intérêt à l’étudier diachroniquement, (à mon avis) se concentrer dans ce paragraphe sur l’explication puis ensuite dégager les axes]</p>
 
-                    <h4>Axes</h4>
+                    <h4>2) Axes</h4>
                     <p>[1/ intérêt diachronique car le terme d’écran n’a pas été toujours utilisé avec la même intensité?]
                         [polysémie selon l’évolution dans le temps, rappeler les grandes périodes et les grands sens du mot écran en un paragraphe]</p>
 
@@ -128,7 +126,7 @@
                 </article>
 
                 <article class="card">
-                    <h3>Présentation de l'étude</h3>
+                    <h3>3) Présentation de l'étude</h3>
 
                     <p>Pourquoi PREVU? XXXXX promesses : xxxx</p>
 
@@ -160,20 +158,30 @@
 
                 <!-- Travail rédaction -->
                 <article class="chapter">
-                    <h2>Nature des données</h2>
+                    <h2>III) Nature des données [Gaétan]</h2>
 
                     <article class="card">
-                    <h3>Corpus</h3>
+                    <h3>1) Corpus</h3>
 
                     <p>Notre étude se fonde sur un échantilon issu d'une partie du corpus global du SCD de Paris 8.</p>
 
                     <p>Notre corpus compte <span class="number">{{ nbNotices.nb | number_format}}</span> notices dont <span class="number">{{ nbNoticesEmpruntees.nb | number_format}}</span> ont été empruntées (sur un ensemble de <span class="number">{{ nbIssues.nb | number_format }}</span> prêts [ajouter les renewals]), ces notices ont été consultables à un moment au moins  dans l'une des bibliothèques dépendant du SCD de Paris 8  entre le <span class="number">{{ dateBorrow.first }}</span> et le <span class="number">{{ dateBorrow.last }}</span>.</p>
 
-                    <p>Ajouter une viz????</p>
+                    <p>Ajouter deux viz????</p>
+
+                        <p>Nb d'emprunts par mois pour la période</p>
+
+                        {#{% for item in nbNoticesEmpruntees  %}#}
+                       {#({{ item.nb }}) ,#}
+                        {#{% endfor %}#}
+
+                        <p>Nb de notices empruntés par mois pour la période (pour montrer que le total des emprunts des emprunts n'équivaut pas au total des livres empruntés</p>
+
+
 
                     <p>La grande majorité des documents pris en compte dans notre étude se compose de livres :  (pourcent d'entre eux qui ont été empruntés) ont été empruntés.</p>
 
-                    <h4>Nature des documents</h4>
+                    <h4>A) Nature des documents</h4>
                     <table class="striped">
                         <tr>
                             <td>Type de document</td>
@@ -189,25 +197,25 @@
                     </table>
                     <p>Par prêts, nous considérons tout <span class="info">retour</span> d'un ouvrage physique, qu'il s'agisse d'un prêt simple ou d'un renouvellement.</p>
 
-                    <h4>Les usages numériques</h4>
+                    <h4>B) Les usages numériques</h4>
                     <p>Les données relatives aux usages numériques nécessitent des traitements différents : il n'y a pas d'emprunts d'ouvrages numériques mais il est possible de recueillir des statistiques de consultation ou le nombre de téléchargements d'ouvrages numériques. Ces données ne sont pas prises en compte dans cette étude. Nous nous concentrons donc uniquement sur les emprunts physiques.</p>
 
-                    <h4>Prêt et lecture</h4>
+                    <h4>C) Prêt et lecture</h4>
                     <p>Notons également qu'avec les données recueillies, nous ne pouvons prétendre à des statistiques de lecture puisqu'un livre emprunté n'est pas systèmatiquement lu, néanmoins les prêts sont sans doute avec les achats, les meilleurs marqueurs permettant d'approcher quantitativement ce type de pratique.</p>
                     </article>
 
                     <article class="card">
-                    <h3>La composition de l'échantillon</h3>
+                    <h3>2) La composition de l'échantillon</h3>
 
                     <p>Notre échantillon présente deux caractéristiques, il se concentre sur tous les ouvrages comportant le mot écran dans leur titre et sur des documents écrits en français (plus exactement dont le titre est écrit en français).</p>
 
-                    <h4>Écran : un mot singulier</h4>
+                    <h4>A) Écran : un mot singulier</h4>
 
                     <p>Les recherches préalablement menées [références : http://www.inaglobal.fr/technologies/article/histoire-de-l-ecran-de-lascaux-l-ipad] ont démontré la singularité du terme écran  : il est polysémique et propre à la culture commune des locuteurs du français.</p>
 
                     <p>[nb de livres qui contiennent le mot écran] contiennent le mot écran, soit (% de livres contenant le mot écran comparé à l'ensemble du corpus) du corpus global.</p>
 
-                    <h4>L'étude des titres</h4>
+                    <h4>B) L'étude des titres</h4>
                     <p>[...ajouter mais quoi?... (on travaille sur le titre seulement parce qu'on a pas le plein texte...et un emploi dans le titre donne une importance au mot]</p>
 
                     <p>Le fait d'utiliser un substantif particulier dans le titre d'un document est un manière de mettre ce terme en avant. Ainsi, en étudiant la présence du terme écran dans les titres du corpus, nous espérons pouvoir distinguer les ouvrages pour lesquels ce terme est décisif.</p>
@@ -215,56 +223,90 @@
                     <p>Ce travail nous permettra dès lors de repérer les différents sens du mot écran selon les contextes dans lesquels il est employé (selon les auteurs, les disciplines, etc. autant de catégories qui seront définies par la suite).</p>
 
 
-                    <h4>La langue</h4>
+                    <h4>C) La langue</h4>
 
                     <p>Bien que le corpus comporte des ouvrages en langue étrangère [essayer de voir le ratio en francais VS autres langues], nous avons fait le choix d'exploiter uniqmement les ouvrages en langue française. En effet, la question de la traduction du terme écran est relativement problématique, et à la lumière des recherches qui ont été menées sur ce sujet (REF : inaglobal, thèse) il ressort qu'il n'existe pas de caractère polysémique équivalent dans d'autres langues.</p>
 
                     <p>Une recherche en langue étrangère nécessiterait donc d'interroger plusieurs termes pour couvrir cette même diversité sémantique : pour le cas de la langue anglaise, qui est le plus simple, il faudrait s'intéresser non seulement au terme <i>screen</i> mais aussi à <i>display</i> et <i>device</i>. Pour information, le corpus compte [nb livres contenant screen] contenant le mot <i>screen</i> et [nb display] contenant le terme <i>device</i>. </p>
 
-                    <h4>Episode de temps défini : corpus non dynamique</h4>
+                    <h4>D) Episode de temps défini : corpus non dynamique</h4>
 
                     <p>Nous travaillons sur échantillon défini dans le temps. La base évolue mais notre échantillon reste le même. Nous ferons des expérimentations sur un échantillon dynamique où le texte et les visualisations : le propos change en fonction des données.</p>
                     <p>Explication de pourquoi nous utilisons cette période de temps : parce qu'il s'agit des données dont nous disposons au moment de la rédaction de l'article.</p>
 
                     </article>
 
-
-
                     <article>
-                        <h2>Analyse globale</h2>
+                        <h2>IV) Analyse globale [Cécile]</h2>
 
                         <article class="card">
 
-                            <h3>Notre échantillon</h3>
+                            <h3>Description générale</h3>
 
                             <p>Nombre de notices contenant le mot écran : <span class="number">{{ nbDocumentsEcran.nb }}</span></p>
                             <p>Présenter de manière générale de l'échantillon : les auteurs qui en font partie, les titres, le nombre d'ouvrages, les disciplines...</p>
 
+                            <ul>
+                                <li>Revenir sur les typologies?</li>
+                                <li>nombres de notices</li>
+                                <li>nombres d'auteurs</li>
+                                <li>les prêts?</li>
+                                <li>les disciplines?</li>
+                                <li>les types de documents</li>
+                                <li>les typologies</li>
+                                <li>les items</li>
+                            </ul>
 
-                            <h4>Répartition des documents par type</h4>
+                            <p>Evacuer tout ce qui n'a pas l'air porteur pour la recherche en le décrivant rapidement</p>
 
-                            <p>S'agit de monographies, de cd-roms, etc. Dans quel proportion.</p>
 
                             <h4>Liste des titres contenant le mot écran</h4>
-                            <table class="striped">
+                            <table class="striped tablesorter">
+                                <thead>
                                 <tr>
+                                    <th>Rang</th>
                                     <th>Titres contenant le mot écran</th>
-                                    <th>Auteur(s)</th>
+                                    <th>Auteur(s) en brut</th>
+                                    <th>Auteur principal</th>
                                     <th>Date de publication</th>
+                                    <th>Prêts</th>
+                                    <th>Exemplaires</th>
+                                    <th>Discipline</th>
                                 </tr>
+                                </thead>
+                                <tbody>
                                 {% for item in docEcrans  %}
                                 <tr>
+                                    <td>{{ loop.index }}</td>
                                     <td>{{ item.title }}</td>
                                     <td>{{ item.authors }}</td>
+                                    <td>{{ item.lastname }} {{ item.firstname }} {% if item.dates|length > 0 %}({{ item.dates }}){% endif %}</td>
                                     <td>{{ item.released }}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 {% endfor %}
+                                </tbody>
                             </table>
+
+                            <h3>Présentation de pourquoi certaines parties peuvent être intéressantes pour l'analyse</h3>
+
+                            <ul>
+
+                                <li>Les dates de publication par typologie</li>
+                                <li>Singulier/pluriel d'écran</li>
+                                <li>Les auteurs</li>
+                                <li>Les prêts par rapport aux livres totaux (voir module lien avec module de Mehdi) [demander]</li>
+                            </ul>
+
                         </article>
+
+
                         <!-- rendre possible de cliquer sur une notice -->
 
                         <!-- importer les dates de publication -->
-                        <h2>Le temps (date de publications)</h2>
+                        <h2>V) Le temps (date de publications) [Cécile / Gaétan]</h2>
                         <article class="card">
                             <h3>Nombre de documents par années</h3>
 
@@ -283,36 +325,33 @@
 
                             <p>Liste des dates les plus populaires / par décennie</p>
                         </article>
-                        <h2>Auteurs</h2>
 
-                        <h2>Disciplines (ccodes)</h2>
+                        <h2>VI) Singulier/pluriel [Cécile / Gaétan]</h2>
 
-                        <article class="card">
+                        <h2>VII) Auteurs</h2>
 
-                            <!-- les ccodes -->
+                        <h2>VIII) Les prêts par rapport aux livres totaux [voir données avec Mehdi]</h2>
 
-                                <div>
-                                    <h3>Répartition des ccodes (donuts) : nb de livres avec écran par ccode</h3>
+                        {#<h2>Disciplines (ccodes)</h2>#}
 
-                                    <h3>Voir la liste des documents d'un ccode : écran dans le titre + 1 ccode</h3>
-                                </div>
-                                <p>Ratio du nombre de livres empruntés pour toutes les disciplines (tous les livres empruntés avec écran) par rapport à tous les livres qui ont le mot écran dans leurs titres.</p>
-                                <div>
-                                <h3>Répartition des emprunts par ccodes</h3>
-                                <h3>Voir tout les livres qui ont été empruntés dans un ccode et le nombre d'emprunts associés</h3>
+                        {#<article class="card">#}
 
-                            </div>
-                            <h3>Evolution des ccodes dans le temps (nombre de ccode par année de publication)</h3>
-                        </article>
+                            {#<!-- les ccodes -->#}
 
+                                {#<div>#}
+                                    {#<h3>Répartition des ccodes (donuts) : nb de livres avec écran par ccode</h3>#}
 
+                                    {#<h3>Voir la liste des documents d'un ccode : écran dans le titre + 1 ccode</h3>#}
+                                {#</div>#}
+                                {#<p>Ratio du nombre de livres empruntés pour toutes les disciplines (tous les livres empruntés avec écran) par rapport à tous les livres qui ont le mot écran dans leurs titres.</p>#}
+                                {#<div>#}
+                                {#<h3>Répartition des emprunts par ccodes</h3>#}
+                                {#<h3>Voir tout les livres qui ont été empruntés dans un ccode et le nombre d'emprunts associés</h3>#}
 
+                            {#</div>#}
+                            {#<h3>Evolution des ccodes dans le temps (nombre de ccode par année de publication)</h3>#}
+                        {#</article>#}
 
-                        <h2>Vedettes Matières</h2>
-
-                        <article class="card">
-
-                        </article>
 
                     </article>
                     <!-- fin du travail -->
@@ -327,7 +366,7 @@
             <!-- Fin travail avec Cécile-->
 
             <section>
-                <h2>Un outil d'exploration</h2>
+                <h2>IX) Un outil d'exploration</h2>
             </section>
 
             <section>
@@ -435,6 +474,12 @@
             var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
             chart.draw(data2, options);
         }
+
+        $(document).ready(function()
+            {
+                $(".tablesorter").tablesorter();
+            }
+        );
     </script>
 
 

@@ -1,0 +1,79 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <section class="container">
+        <h1>Bibliothèque numériques : genre & csv</h1>
+
+        <article class="card">
+
+            <h2>Statistiques générales</h2>
+
+            <p>Nombre de logs : <span class="number">{{ total.nb }}</span></p>
+
+        </article>
+
+
+        <article class="card">
+            <h2>Répartition par heure</h2>
+
+            <table class="striped">
+                <tr>
+                    <th>Heure</th>
+                    <th>Nombre d'occurences</th>
+                </tr>
+                {% for item in hours  %}
+
+                    <tr>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.nb }}</td>
+                    </tr>
+
+                {% endfor %}
+            </table>
+
+        </article>
+
+        <article class="card">
+            <h2>Répartition par jour</h2>
+
+            <table class="striped">
+                <tr>
+                    <th>Jour</th>
+                    <th>Nombre d'occurences</th>
+                </tr>
+                {% for item in days  %}
+                    {% if item.title != "0" %}
+                        <tr>
+                            <td>{{ item.title }}</td>
+                            <td>{{ item.nb }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+
+        </article>
+
+        <article class="card">
+            <h2>Adresse des utilisateurs</h2>
+
+            <table class="striped">
+                <tr>
+                    <th>Adresse</th>
+                    <th>Nombre d'occurences</th>
+                </tr>
+                {% for item in adresses  %}
+                    {% if item.title != "0" %}
+                        <tr>
+                            <td>{{ item.title }}</td>
+                            <td>{{ item.nb }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </article>
+
+
+
+    </section>
+{% endblock %}

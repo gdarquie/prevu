@@ -1,0 +1,35 @@
+
+<div class="row">
+
+    <div class="card col offset-s2 s8">
+    <p>Titre : <strong>{{ book.title }}</strong></p>
+    <p>Auteur : {{ book.customAuthor }}</p>
+    <p>Date de publication : {{ book.customPublication }}</p>
+    <p>ISBN : {{ book.isbn }}</p>
+    </div>
+
+    <div class="col offset-s2 s8 card">
+
+        <h3 class="center">Modifier les informations</h3>
+        <div class="cartouche mini-form ">
+            {{form_row(bookForm.customAuthor, {
+                'label' : "Auteur (version personnalisable)"
+            })}}
+
+            {{form_row(bookForm.customPublication, {
+                'label' : "Année de publication (version personnalisable)"
+            })}}
+            {{form_row(bookForm.customDiscipline, {
+                'label' : "Discipline"
+            })}}
+            {{form_row(bookForm.customNombre, {
+                'label' : "Singulier/Pluriel?"
+            })}}
+            {{form_row(bookForm.comment ,{
+                'label' : 'commentaire',
+                'attr': {'class': 'materialize-textarea'}
+            }) }}
+        </div>
+    </div>
+
+</div>

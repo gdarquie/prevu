@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <section class="container">
+        <h1>{{ type }}</h1>
+
+        <article class="card">
+            <table class="striped">
+                <tr>
+                    <th>Titre</th>
+                    <th>Auteur</th>
+                    <th>Prêts</th>
+                </tr>
+            {% for item in issues  %}
+                <tr>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.author }}</td>
+                    <td>{{ item.issues }}</td>
+                </tr>
+
+            {% endfor %}
+            </table>
+        </article>
+
+        <article>
+            <h1>Les auteurs les plus empruntés en {{ type }}</h1>
+
+            <div class="card">
+                <table class="striped">
+                        <tr>
+                            <th>Auteur</th>
+                            <th>Prêts</th>
+                            <th>Nombre de documents</th>
+                        </tr>
+                    {% for item in authors  %}
+                        <tr>
+                            <td>{{ item.author }}</td>
+                            <td>{{ item.issues }}</td>
+                            <td>{{ item.nb }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </article>
+    </section>
+
+{% endblock %}

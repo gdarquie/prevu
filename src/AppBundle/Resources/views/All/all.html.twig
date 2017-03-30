@@ -1,0 +1,94 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        .types{
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Les 1000 documents les plus empruntées en 2012</h1>
+
+        <article class="card">
+            <h2>Les types de document les plus empruntés</h2>
+
+            <div class="types">
+            {% for item in types  %}
+                {% if item.type != null %}
+                    <a href="{{ path('all_type', {'type' : item.type }) }}" class="chip">{{ item.type }}</a>
+                {% endif %}
+            {% endfor %}
+            </div>
+
+
+            <table class="striped">
+                <tr>
+                    <th>Rang</th>
+                    <th>Type</th>
+                    <th>Nombre</th>
+                </tr>
+                {% for item in types  %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ item.type }}</td>
+                        <td>{{ item.issues }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </article>
+
+        <article class="card">
+
+            <h2>Les auteurs les plus empruntés</h2>
+            <table class="striped">
+                <tr>
+                    <th>Rang</th>
+                    <th>Author</th>
+                    <th>Type</th>
+                    <th>Prêts</th>
+                </tr>
+                {% for item in authors  %}
+                    {% if item.author != null %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ item.author }}
+                        <td>{{ item.type }}</td>
+                        <td>{{ item.issues }}</td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </article>
+
+        <article class="card">
+
+            <h2>Les 1000 documents</h2>
+            <table class="striped">
+                <tr>
+                    <th>Rang</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Type</th>
+                    <th>Prêts</th>
+                </tr>
+                {% for item in issues  %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.author }}
+                        <td>{{ item.type }}</td>
+                        <td>{{ item.issues }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </article>
+
+    </div>
+{% endblock %}

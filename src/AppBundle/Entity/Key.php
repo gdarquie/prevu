@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Key
  *
- * @ORM\Table(name="key")
+ * @ORM\Table(name="association")
  * @ORM\Entity
  */
 class Key
@@ -32,7 +32,7 @@ class Key
     /**
      * @var \AppBundle\Entity\Book
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Book")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Book", inversedBy="keys")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="prevu", referencedColumnName="id_book")
      * })
@@ -57,6 +57,12 @@ class Key
      */
     private $library;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="issues", type="integer", nullable=true)
+     */
+    private $issues;
 
     /**
      * @ORM\Column(type="datetime")
@@ -181,7 +187,20 @@ class Key
         $this->last_update = $last_update;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getIssues()
+    {
+        return $this->issues;
+    }
 
-
+    /**
+     * @param mixed $issues
+     */
+    public function setIssues($issues)
+    {
+        $this->issues = $issues;
+    }
 
 }

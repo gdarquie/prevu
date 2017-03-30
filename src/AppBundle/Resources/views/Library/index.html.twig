@@ -2,4 +2,138 @@
 
 {% block body %}
 
+    <section class="container">
+        <h1 class="center">{{ biblio.name }}</h1>
+
+        <div class="card">
+            <h2>Nombre de prêts par date</h2>
+
+            <div id='myChart'>
+                <svg style='height:300px'> </svg>
+            </div>
+
+            {#{% for item in returns  %}#}
+                {#{{ item.returndate | date()}}#}
+                {#{{ item.nb }}#}
+            {#{% endfor %}#}
+        </div>
+
+        <div class="card">
+
+            <h2>Informations générales</h2>
+
+            <p>Nombre de notices : {{ nbNotices.nb }}</p>
+            <p>Nombre d'emprunteurs : {{ nbBorrowers.nb }}</p>
+            <p>Nombre d'emprunts total : {{ nbEmprunts.nb }} </p>
+            <p>Nombre de notices empruntés : {{ nbNoticesEmpruntes.nb }}</p>
+            <p>Premier prêt : {{ firstEmprunt.nb }}</p>
+            <p>Dernier prêt : {{ lastEmprunt.nb }}</p>
+            <p>Nombre d'auteurs : {{ nbAuteurs.nb }}</p>
+            <p>Nombre d'emprunts moyen par mois : ???</p>
+
+        </div>
+
+        <div class="card">
+            <h2>Les 5 auteurs les plus empruntés</h2>
+        </div>
+
+        <div class="card">
+            <h2>Les 30 livres les plus empruntés</h2>
+
+            <table class="striped mini-table">
+                <tr>
+                    <th>Rang</th>
+                    <th>Title</th>
+                    <th>Issues</th>
+                </tr>
+                {% for item in topNotices  %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.issues }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Le public</h2>
+
+            <p>Nombre d'emprunteurs : </p>
+            <p>Ratio hommes / femmes : </p>
+
+        </div>
+
+        <div class="card">
+            <h2>A noter</h2>
+
+            <p>Nombre de livres qui sont dans d'autres bibliothèques de Prévu : </p>
+        </div>
+
+        <div class="card">
+            <h2>Nouvelles interfaces</h2>
+            
+            <ul>
+                <li>par années de publication -> focus sur une année</li>
+                <li>un auteur pour une biblio</li>
+                <li>un livre pour une biblio</li>
+                <li>plus tard : une œuvre pour une biblio</li>
+            </ul>
+        </div>
+        
+    </section>
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script src="https://d3js.org/d3-time.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+
+    <script>
+
+        /*These lines are all chart setup.  Pick and choose which chart features you want to utilize. */
+        nv.addGraph(function() {
+            var chart = nv.models.lineChart()
+                    .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
+                    .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
+                    .duration(350)  //how fast do you want the lines to transition?
+                    .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
+                    .showYAxis(true)        //Show the y-axis
+                    .showXAxis(true)        //Show the x-axis
+                ;
+
+            chart.xAxis     //Chart x-axis settings
+                .axisLabel('Date')
+                .tickFormat(d3.format(",r"));
+
+
+            chart.yAxis     //Chart y-axis settings
+                .axisLabel('Nb de prêts')
+                .tickFormat(d3.format(',r'));
+
+            /* Done setting the chart up? Time to render it!*/
+            var myData = [
+                {
+                    //[{x: 1, y: 1}, {x: 2, y: 1}, {x: 3, y: 1}]
+                    values: [{% for item in returns  %}{ x : {{ loop.index }} , y : {{ item.nb }} } {% if loop.last %}{% else %}, {% endif %} {% endfor %}],
+                    key: 'Nombre de prêts par jour', //key  - the name of the series.
+                    color: '#ff7f0e'  //color - optional: choose your own line color.
+                },
+            ];
+
+            d3.select('#myChart svg')    //Select the <svg> element you want to render the chart in.
+                .datum(myData)         //Populate the <svg> element with chart data...
+                .call(chart);          //Finally, render the chart!
+
+            //Update the chart when window resizes.
+            nv.utils.windowResize(function() { chart.update() });
+            return chart;
+        });
+
+    </script>
+
 {% endblock %}

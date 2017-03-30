@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <section class="container">
+        <div class="card">
+
+            <h2>Result(s) - {{ string }}</h2>
+
+        {% for item in results  %}
+            <div class="chip">{{ item.title }}</div>
+        {% endfor %}
+        </div>
+    </section>
+{% endblock %}

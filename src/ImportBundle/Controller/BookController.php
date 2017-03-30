@@ -80,7 +80,7 @@ class BookController extends Controller
 
             //Sélection du dernier biblionumber qu'on a enregistré dans Prévu
 
-            $sql_koha = "SELECT koha as id FROM `key` WHERE library = :library ORDER BY id_key DESC LIMIT 1"; //0.0002s
+            $sql_koha = "SELECT koha as id FROM association WHERE library = :library ORDER BY id_key DESC LIMIT 1"; //0.0002s
             $stmt = $connPrevu->prepare($sql_koha);
             $stmt->bindValue("library", $library);
             $stmt->execute();
@@ -116,11 +116,11 @@ class BookController extends Controller
                 $id_prevu = $id_prevu['id'] + 1;
 
                 //-----------------------------------------------------------
-                //Vérification pour voir si on a déjà entré cette donnée
+                //Vérification pour voir si on a déjà entré cette donnée (a-t-on vraiment besoin de cette étape, n'est-elle pas déjà fait avant?)
                 //-----------------------------------------------------------
 
                 //On compte le nombre de notices qui ont déjà ce code pour savoir si nous possédons déjà cette notice
-                $sql = "SELECT COUNT(*) as nb FROM prevu.key WHERE prevu = :id AND library = :library ";
+                $sql = "SELECT COUNT(*) as nb FROM prevu.association WHERE koha = :id AND library = :library ";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindValue("id", $id_koha);
                 $stmt->bindValue("library", $library);
@@ -131,7 +131,6 @@ class BookController extends Controller
 //                $check = 0;
 
                 if ($check < 1) {
-
                     //-----------------------------------------------------------------------------------------------------------------
                     //Vérification si la notice existe déjà dans la base pour une autre bibiliothèque cette fois
                     //-----------------------------------------------------------------------------------------------------------------
@@ -148,7 +147,7 @@ class BookController extends Controller
                     $title = utf8_encode($ref['title']);
                     $isbn = utf8_encode(addslashes($ref['isbn']));
 
-                    $sql = "SELECT COUNT(*) as nb FROM book as b INNER JOIN `key` as k ON k.prevu = b.id_book WHERE title = :title AND isbn = :isbn AND library != :library AND k.type = 'book' ";
+                    $sql = "SELECT COUNT(*) as nb FROM book as b INNER JOIN association as k ON k.prevu = b.id_book WHERE title = :title AND isbn = :isbn AND library != :library AND k.type = 'book' ";
                     $stmt = $connPrevu->prepare($sql);
                     $stmt->bindValue("title", $title);
                     $stmt->bindValue("isbn", $isbn);
@@ -160,6 +159,8 @@ class BookController extends Controller
 //                    $exist = 0;
 
                     if ($exist < 1) {
+
+
                         //-----------------------------------------------------------
                         //Création de la notice
                         //-----------------------------------------------------------
@@ -247,6 +248,7 @@ class BookController extends Controller
                                 $checkAuthor = $stmt->fetch();
                                 $checkAuthor = $checkAuthor['nb'];
 
+
                                 //Si l'auteur n'existe pas déjà, on insère ses infos
                                 if ($checkAuthor < 1) {
 
@@ -297,7 +299,7 @@ class BookController extends Controller
                     else{
 
                         //Il faut récupérer son id
-                        $sql = "SELECT id_book as id FROM book as b INNER JOIN `key` as k ON k.prevu = b.id_book WHERE title = :title AND isbn = :isbn AND library != :library AND k.type = 'book' ";
+                        $sql = "SELECT id_book as id FROM book as b INNER JOIN association as k ON k.prevu = b.id_book WHERE title = :title AND isbn = :isbn AND library != :library AND k.type = 'book' ";
                         $stmt = $connPrevu->prepare($sql);
                         $stmt->bindValue("title", $title);
                         $stmt->bindValue("isbn", $isbn);
@@ -311,7 +313,7 @@ class BookController extends Controller
 
 //                    dump($exist);die();
 
-                    $sql = "INSERT INTO prevu.key(prevu, koha, type, library, date_creation, last_update) VALUES( :id_prevu, :id_koha,:type, :library , NOW(), NOW() );";
+                    $sql = "INSERT INTO prevu.association(prevu, koha, type, library, date_creation, last_update) VALUES( :id_prevu, :id_koha,:type, :library , NOW(), NOW() );";
 
 
                     $stmt = $conn->prepare($sql);
@@ -378,7 +380,7 @@ class BookController extends Controller
                     $config = new \Doctrine\DBAL\Configuration();
                     $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
 
-                    $sql_key = "DELETE FROM `key`;";
+                    $sql_key = "DELETE FROM association;";
                     $sql_book = "DELETE FROM `book`;";
 
                     $sql = $sql_key.$sql_book;

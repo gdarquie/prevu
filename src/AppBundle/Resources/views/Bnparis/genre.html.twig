@@ -1,0 +1,90 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <section class="container">
+        <h1 class="center">Bibliothèque numérique - Genres</h1>
+
+        <article class="card">
+
+            <h2>Général</h2>
+
+            <table class="striped">
+                <tr>
+                    <th>Genre</th>
+                    <th>Nombre d'occurences</th>
+                </tr>
+
+                <tr>
+                    <td>{{ total.title }}</td>
+                    <td>{{ total.nb }}</td>
+                </tr>
+
+            </table>
+        </article>
+
+        <article class="card">
+
+            <h2>Catégories sociaux professionnelles</h2>
+
+            <table class="striped">
+                <tr>
+                    <th>CSP</th>
+                    <th>Nombre d'occurences</th>
+                </tr>
+                {% for item in csp  %}
+                    {% if item.title != "0" %}
+                        <tr>
+                            <td><a href="{{ path('paris_bn_genre_csp', {'genre' : total.title , 'csp' : item.title }) }}">{{ item.title }}</a></td>
+                            <td>{{ item.nb }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </article>
+
+        <article class="card">
+
+            <h2>Heures de consultation</h2>
+
+            <table class="striped">
+                <tr>
+                    <th>Heure</th>
+                    <th>Nombre d'occurences</th>
+                </tr>
+                {% for item in hour  %}
+
+                    <tr>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.nb }}</td>
+                    </tr>
+
+                {% endfor %}
+            </table>
+        </article>
+
+        <article class="card">
+
+            <h2>Adresses</h2>
+
+            <table class="striped">
+                <tr>
+                    <th>Adresse</th>
+                    <th>Nombre d'occurences</th>
+                </tr>
+                {% for item in adresses  %}
+
+                    <tr>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.nb }}</td>
+                    </tr>
+
+                {% endfor %}
+            </table>
+        </article>
+
+
+    </section>
+
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <section class="container">
+
+        <h1 class="center">Editer une notice</h1>
+
+        {{ form_start(bookForm)}}
+        {{ include('AdminBundle:Book:_form.html.twig')}}
+        <button class="btn black right" type="submit" formnovalidate >Editer</button>
+        {{ form_end(bookForm)}}
+
+    </section>
+
+{% endblock %}

@@ -18,6 +18,9 @@
             <!--Import materialize.css-->
             <link rel="stylesheet" href="{{ asset('assets/vendor/materialize/dist/css/materialize.css') }}">
 
+            <!--NVD3 -->
+            <link rel="stylesheet" href="{{asset('assets/vendor/nvd3/build/nv.d3.min.css')}}">
+
             <!-- custom -->
             <link rel="stylesheet" href="{{ asset('css/style.css')}}">
 
@@ -30,8 +33,23 @@
 
         <!-- Nav & Log FOS -->
 
-        <ul id="menu_add" class="dropdown-content">
-            <li><a href="{{ path('homepage') }}">accueil</a></li>
+        <ul id="menu_article" class="dropdown-content">
+            <li><a href="{{ path('ecran') }}" class="amber-text text-darken-1">Article</a></li>
+            <li><a href="{{ path('ecran_editor') }}" class="amber-text text-darken-1">Editeur</a></li>
+        </ul>
+
+        <ul id="menu_admin" class="dropdown-content">
+            <li><a href="{{ path('admin') }}" class="amber-text text-darken-1">Gestion</a></li>
+            <li><a href="{{ path('import') }}" class="amber-text text-darken-1">Import</a></li>
+        </ul>
+
+        <ul id="menu_biblio" class="dropdown-content">
+            <li><a href="{{ path('bibliotheque', {"id" : 1}) }}" class="amber-text text-darken-1">SCD Paris 8</a></li>
+            <li><a href="#" class="amber-text text-darken-1">SCD Paris 10 (bientôt)</a></li>
+            <li><a href="#" class="amber-text text-darken-1">DILA (bientôt)</a></li>
+            <li><a href="{{ path('paris_bn') }}" class="amber-text text-darken-1">Bibliothèque numérique de Paris</a></li>
+            <li><a href="{{ path('bibliotheque', {"id" : 2 }) }}" class="amber-text text-darken-1">BM Roubaix</a></li>
+            <li><a href="{{ path('all') }}" class="amber-text text-darken-1">Général BM</a></li>
         </ul>
 
         <div class="navbar-fixed">
@@ -40,14 +58,30 @@
 
                     <img id="logo" src="{{ asset('img/labex_web-develop-gris-clair.png') }}" alt="">
 
-                    <a href="/" class="brand-logo left amber darken-1">Prévu</a>
+                    <a href="{{ path('homepage')}}" class="brand-logo left amber darken-1">Prévu</a>
 
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+                        <li><a class="amber-text text-darken-1" href="{{ path('contribuer') }}">Contribuer</a></li> <!-- page qui explique comment récupérer les données -->
+
                         <li><a href="" class="amber-text text-darken-1">Œuvres</a></li>
-                        <li><a href="{{ path('ecran') }}" class="amber-text text-darken-1">Article</a></li>
-                        <li>Version 2.2 (test)</li>
+
+                        <!-- -->
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            <li ><a class="dropdown-button amber-text text-darken-1" href="#!" data-activates="menu_add">add<i class="material-icons right">arrow_drop_down</i></a></li>
+
+                            {% if is_granted('ROLE_BIBLIO') %}
+                                <li><a class="dropdown-button amber-text text-darken-1" href="#!" data-activates="menu_biblio">Bibliothèques<i class="material-icons right">arrow_drop_down</i></a></li>
+
+                                <!-- A terme ajouter rôle de bibliothécaire -->
+                                <li><a class="dropdown-button amber-text text-darken-1" href="#!" data-activates="menu_article">Article<i class="material-icons right">arrow_drop_down</i></a></li>
+
+                            {% endif %}
+
+
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li><a class="dropdown-button amber-text text-darken-1" href="#!" data-activates="menu_admin">Admin<i class="material-icons right">arrow_drop_down</i></a></li>
+                            {% endif %}
+
                             <li class="amber-text text-darken-1">connected as {{ app.user.username }}</li>
                             <li><a class="amber-text text-darken-1" href="{{ path('fos_user_security_logout') }}">logout</a></li>
                         {% else %}
@@ -61,15 +95,13 @@
 
     {% endblock %}
 
-    <div>
-
-        {% for msg in app.session.flashBag.get('success') %}
-            <div class="container">
-                <div class="card-panel">
-                    <span class="teal-text">{{msg}}</span>
-                </div>
+    {% for msg in app.session.flashBag.get('success') %}
+        <div class="container">
+            <div class="card-panel">
+                <span class="teal-text">{{msg}}</span>
             </div>
-        {% endfor %}
+        </div>
+    {% endfor %}
 
 
     {#{% block header %}#}
@@ -100,6 +132,34 @@
 
     {% block body %}{% endblock %}
 
+    {%  block footer %}
+        <footer class="page-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h5 class="white-text">Version 2.3 (test)</h5>
+                        <p class="grey-text text-lighten-4">Prévu / ImPrévu - Version de test</p>
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                        <h5 class="white-text">Links</h5>
+                        <ul>
+                            <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    © 2014 Copyright Text
+                    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                </div>
+            </div>
+        </footer>
+
+    {% endblock %}
+
     {% block javascripts %}
 
         <!-- JQuery -->
@@ -111,19 +171,29 @@
                 integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
                 crossorigin="anonymous"></script>
 
+        <!-- Pour nvd3.js -->
+        <script
+                src="https://code.jquery.com/jquery-2.2.4.min.js"
+                integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+                crossorigin="anonymous"></script>
+
+
+        <!-- Table sorter -->
+        <script type="text/javascript" src="{{ asset('assets/vendor/tablesorter/jquery.tablesorter.js') }}"></script>
+
+        <!-- NVD3 -->
+        <script type="text/javascript" src="{{asset('assets/vendor/d3/d3.js')}}"></script>
+        <script type="text/javascript" src="{{asset('assets/vendor/nvd3/build/nv.d3.js')}}"></script>
+
         <!-- Materialize -->
         <script type="text/javascript" src="{{asset('assets/vendor/materialize/dist/js/materialize.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/vendor/materialize/js/parallax.js')}}"></script>
 
-        {#<!-- D3.JS -->#}
-        {#<script src="{{ asset('bower_components/d3/d3.min.js') }}"></script>#}
-        {#  <script type="text/javascript" src="https://cdnjs.com/libraries/Chart.js"></script> #}
-        {#<!-- END D3.JS -->#}
-
-        {#<!-- nvD3 -->#}
-        {#<script src="{{ asset('bower_components/nvd3/build/nv.d3.min.js') }}"></script>#}
+        <!-->
+        <script type="text/javascript" src="{{asset('js/prevu.js')}}"></script>
 
     {% endblock %} <!-- javascript block -->
+
 
     </body>
 

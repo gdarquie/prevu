@@ -68,27 +68,35 @@ class BorrowerController extends Controller
         //Import des borrowers
         //-----------------------------------------------------------
 
-        $sql = "INSERT INTO borrower(`koha`, `yearofbirth`,`library`, library, `date_creation`, `last_update`) (SELECT MD5(borrowers.borrowernumber), YEAR(dateofbirth), :library, NOW(), NOW() FROM koha.borrowers)"; //les borrowers ont une libary seulement (permet de supprimer
+        $sql = "INSERT INTO borrower(`koha`, `yearofbirth`,`library`, `date_creation`, `last_update`) (SELECT MD5(borrowers.borrowernumber), YEAR(dateofbirth), :library, NOW(), NOW() FROM koha.borrowers)"; //les borrowers ont une libary seulement (permet de supprimer
         $stmt = $conn->prepare($sql);
         $stmt->bindValue("library", $library);
         $stmt->execute();
 
+
+        //Roubaix
+        $sql = "INSERT INTO borrower(`koha`, `yearofbirth`,`library`, `date_creation`, `last_update`) (SELECT borrowers.borrowernumber, YEAR(dateofbirth), 2, NOW(), NOW() FROM prevu_rbx.borrowers)";
 
         //-----------------------------------------------------------
         //Import des items
         //-----------------------------------------------------------
 
-        $sql = "INSERT INTO `item`(`id_book`, `price`, koha, library, `date_creation`, `last_update`) (SELECT p.prevu,price, i.itemnumber,:library, NOW(), NOW() FROM koha.items as i INNER JOIN prevu.key as p ON i.biblionumber = p.koha)";
+        $sql = "INSERT INTO `item`(`id_book`, `price`, koha, library, `date_creation`, `last_update`) (SELECT p.prevu,price, i.itemnumber,:library, NOW(), NOW() FROM koha.items as i INNER JOIN prevu.association as p ON i.biblionumber = p.koha)";
         //INSERT INTO prevu.item(`id_book`, `price`, library, `date_creation`, `last_update`) (SELECT p.prevu,price, 1, NOW(), NOW() FROM koha.items as i INNER JOIN prevu.key as p ON i.biblionumber = p.koha)
         $stmt = $conn->prepare($sql);
         $stmt->bindValue("library", $library);
         $stmt->execute();
 
+
+        //Roubais - lent avec Roubaix environ 10 min
+        $sql = "INSERT INTO `item`(`id_book`, `price`, koha, library, `date_creation`, `last_update`) (SELECT p.prevu,price, i.itemnumber,2, NOW(), NOW() FROM prevu_rbx.items as i INNER JOIN prevu.association as p ON i.biblionumber = p.koha)";
+
         //--------------------------------------------
         //---------Import des issues
         //--------------------------------------------
 
-        $sql = "INSERT INTO `issue`(`id_borrower`, `id_book`, `sex`, `datedue`, `issuedate`, `returndate`, `renewals`, `date_creation`, `last_update`, `id_library`)(SELECT id_borrower, k.prevu, b.sex, i.date_due, i.issuedate, i.returndate, i.renewals ,NOW(), NOW(), 1  FROM old_issues as i INNER JOIN borrowers as b ON i.borrowernumber = b.borrowernumber )";
+//        $sql = "INSERT INTO `issue`(`id_borrower`, `id_book`, `sex`, `datedue`, `issuedate`, `returndate`, `renewals`, `date_creation`, `last_update`, `id_library`)(SELECT id_borrower, k.prevu, b.sex, i.date_due, i.issuedate, i.returndate, i.renewals ,NOW(), NOW(), 1  FROM old_issues as i INNER JOIN borrowers as b ON i.borrowernumber = b.borrowernumber )";
+
 
 
 //        INSERT INTO prevu.issue(`id_borrower`, `id_book`, `sex`, `issuedate`, `returndate`, `renewals`, `date_creation`, `last_update`, `id_library`)(
@@ -113,21 +121,24 @@ class BorrowerController extends Controller
         $stmt->bindValue("library", $library);
         $stmt->execute();
 
+        //Rbx
+        $sql = "INSERT INTO prevu.issue(`koha_borrower`, `koha_item`, `sex`, `issuedate`, `returndate`, `renewals`, `date_creation`,`last_update`, `id_library`)(SELECT i.borrowernumber, i.itemnumber, b.sex, i.issuedate, i.returndate, i.renewals, NOW(), NOW(),:library FROM prevu_rbx.old_issues as i LEFT JOIN koha.borrowers as b ON i.borrowernumber = b.borrowernumber)";
+
 
         //Update des id borrowers
 
         //création d'index
         $sql = "CREATE INDEX index_borrower ON borrower (id_borrower)";
+        $sql = "CREATE INDEX index_borrower ON borrower (`koha`)";
         $sql = "CREATE INDEX index_borrower ON issue (id_borrower)";
+        $sql = "CREATE INDEX index_kohaborrower ON issue (koha_borrower)";
+        $sql = "CREATE INDEX index_kohaitem ON issue (koha_item)";
 
         //Update des id_books
 
-
         $sql = "UPDATE issue i JOIN borrower b ON b.koha = i.koha_borrower SET i.id_borrower= b.id_borrower WHERE i.id_library = 1";
-
-
-        $sql = "SELECT b.id_borrower FROM issue as i INNER JOIN borrower as b ON b.koha = i.koha_borrower";
-
+        //Rbx (ok avec index)
+        $sql = "UPDATE issue i JOIN borrower b ON b.koha = i.koha_borrower SET i.id_borrower= b.id_borrower WHERE i.id_library = 2";
 
 
         //Update des id notices
@@ -136,6 +147,8 @@ class BorrowerController extends Controller
 
         $sql = "SELECT i.id_book FROM issue i LEFT JOIN item t ON t.koha = i.koha_item";
         $sql = "UPDATE issue i JOIN item t ON t.koha = i.koha_item SET i.id_book = t.id_book WHERE i.id_library = 1";
+        //rbx - 10h21 à
+        $sql = "UPDATE issue i JOIN item t ON t.koha = i.koha_item SET i.id_book = t.id_book WHERE i.id_library = 2";
 
         //update des prêts pour les issues
         $sql = "SELECT b.title, COUNT(*) as nb FROM book as b INNER JOIN issue as i ON i.id_book = b.id_book GROUP BY b.id_book ORDER BY nb DESC";

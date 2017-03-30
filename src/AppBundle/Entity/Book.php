@@ -20,7 +20,7 @@ class Book
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idBook;
+    private $id;
 
     /**
      * @var string
@@ -154,6 +154,11 @@ class Book
 
 
     /**
+     * @ORM\OneToMany(targetEntity="Key", mappedBy="prevu")
+     */
+    private $keys;
+
+    /**
      * @var \AppBundle\Entity\Author
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Author", inversedBy="books")
@@ -162,6 +167,49 @@ class Book
      * })
      */
     private $first_author;
+
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="custom_publication", type="integer", length=4, nullable=true)
+     */
+    private $custom_publication;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="custom_author", type="text", length=16777215, nullable=true)
+     */
+    private $custom_author;
+
+    /**
+     * @var \AppBundle\Entity\Thesaurus
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="custom_nombre", referencedColumnName="id_thesaurus")
+     * })
+     */
+    private $custom_nombre;
+
+    /**
+     * @var \AppBundle\Entity\Thesaurus
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="custom_discipline", referencedColumnName="id_thesaurus")
+     * })
+     */
+    private $custom_discipline;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="text", length=16777215, nullable=true)
+     */
+    private $comment;
+
 
     /**
      * @ORM\Column(type="datetime")
@@ -179,6 +227,7 @@ class Book
     public function __construct()
     {
         $this->languages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->keys = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -376,18 +425,19 @@ class Book
     /**
      * @return int
      */
-    public function getIdBook()
+    public function getId()
     {
-        return $this->idBook;
+        return $this->id;
     }
 
     /**
-     * @param int $idBook
+     * @param int $id
      */
-    public function setIdBook($idBook)
+    public function setId($id)
     {
-        $this->idBook = $idBook;
+        $this->id = $id;
     }
+
 
     /**
      * @return Country
@@ -499,6 +549,103 @@ class Book
     public function setLastUpdate($last_update)
     {
         $this->last_update = $last_update;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getKeys()
+    {
+        return $this->keys;
+    }
+
+    /**
+     * @param mixed $keys
+     */
+    public function setKeys($keys)
+    {
+        $this->keys = $keys;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getCustomNombre()
+    {
+        return $this->custom_nombre;
+    }
+
+    /**
+     * @param mixed $custom_nombre
+     */
+    public function setCustomNombre($custom_nombre)
+    {
+        $this->custom_nombre = $custom_nombre;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCustomDiscipline()
+    {
+        return $this->custom_discipline;
+    }
+
+    /**
+     * @param mixed $custom_discipline
+     */
+    public function setCustomDiscipline($custom_discipline)
+    {
+        $this->custom_discipline = $custom_discipline;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param string $comment
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCustomPublication()
+    {
+        return $this->custom_publication;
+    }
+
+    /**
+     * @param int $custom_publication
+     */
+    public function setCustomPublication($custom_publication)
+    {
+        $this->custom_publication = $custom_publication;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomAuthor()
+    {
+        return $this->custom_author;
+    }
+
+    /**
+     * @param string $custom_author
+     */
+    public function setCustomAuthor($custom_author)
+    {
+        $this->custom_author = $custom_author;
     }
 
 
